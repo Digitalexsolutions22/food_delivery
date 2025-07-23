@@ -4,8 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/custom_widgets/text.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
-
 class BottomNavShell extends StatefulWidget {
   final Widget child;
   const BottomNavShell({super.key, required this.child});
