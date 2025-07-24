@@ -40,4 +40,13 @@ class AppColors {
   static const Color peachOrange = Color(0xFFFEB06A);
   static const Color skyBlue = Color(0xFF36D6E7); // #36d6e7
   static const Color lightGreyBackground = Color(0xFFF9F9F9);
+  static const Color lightGrey = Color(0xFFE5E5E5); // #FFF7ED
+  static const Color green29Opacity = Color(0x4AC1174A); // 29% opacity
+  static const Color softGreen = Color(0xFFCFE2B3);
+  static const Color softYellow = Color(0xFFFFF7D4);
+  // Green color
+  static const Color freshGreen = Color(0xFF00C117);
+
+  // Light Yellow color
+  static const Color softYellow1 = Color(0xFFFFE3AD);
 }

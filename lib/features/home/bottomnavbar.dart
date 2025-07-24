@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/features/panlsandorders/cart.dart';
 import 'package:go_router/go_router.dart';
 
 class BottomNavShell extends StatefulWidget {
@@ -122,7 +123,10 @@ class _BottomNavShellState extends State<BottomNavShell> {
         ),
         floatingActionButton: FloatingCartButton(
           onTap: () {
-            context.push('/orders');
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => CartSceeen()),
+            );
           },
         ),
       ),

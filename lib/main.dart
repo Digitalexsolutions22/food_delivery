@@ -10,11 +10,6 @@ void main() {
     const SystemUiOverlayStyle(
       statusBarColor: AppColors.orange, // Set your desired color
       statusBarIconBrightness: Brightness.light, // For white icons
-    ),
-  );
-  WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
       systemNavigationBarColor: AppColors.orange,
       systemNavigationBarIconBrightness: Brightness.light,
     ),
