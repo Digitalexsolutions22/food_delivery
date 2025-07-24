@@ -57,7 +57,7 @@ class MainBody extends StatelessWidget {
   const MainBody({
     super.key,
     required this.title,
-    this.fontFamily = AppFonts.poppins,
+    this.fontFamily = AppFonts.roboto,
     this.fontSize = 14,
     this.fontWeight = FontWeight.normal,
     this.fontcolor = AppColors.black,
@@ -97,12 +97,7 @@ class Subheader extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        MainBody(
-          title: title,
-          fontFamily: AppFonts.poppins,
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        MainBody(title: title, fontSize: 16, fontWeight: FontWeight.bold),
         if (showicon)
           Icon(
             Icons.arrow_forward_ios_rounded,

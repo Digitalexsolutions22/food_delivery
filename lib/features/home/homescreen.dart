@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
-import 'package:food_delivery/custom_widgets/text.dart';
+import 'package:food_delivery/customwidgets/text/body.dart';
 
 class Homescreen extends StatelessWidget {
+  const Homescreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -247,7 +249,7 @@ class Homescreen extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                        Container(
+                                        SizedBox(
                                           height: 36,
                                           child: ElevatedButton(
                                             onPressed: () {},
