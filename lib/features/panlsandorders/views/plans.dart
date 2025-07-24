@@ -200,8 +200,8 @@ class _PlansScreenState extends State<PlansScreen>
                                             children: [
                                               MainBody(
                                                 title: "₹150",
-                                                fontSize: 11,
-                                                fontWeight: FontWeight.w500,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold,
                                                 fontcolor: AppColors.orange,
                                               ),
 
@@ -339,6 +339,87 @@ class _PlansScreenState extends State<PlansScreen>
                         ),
                       );
                     },
+                  ),
+                  MainBody(title: "Why Subscribe?", fontSize: 16),
+                  SizedBox(height: 10),
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(width: 0.2),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.yellowTransparent,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.restaurant_menu,
+                                color: AppColors.orange,
+                                size: 20,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Fresh Daily',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'Prepared fresh every day',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      Container(
+                        padding: EdgeInsets.all(14),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15),
+                          border: Border.all(width: 0.2),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: AppColors.yellowTransparent,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Icon(
+                                Icons.calendar_today_outlined,
+                                color: AppColors.orange,
+                                size: 20,
+                              ),
+                            ),
+                            SizedBox(height: 8),
+                            Text(
+                              'Flexible',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            Text(
+                              'Skip or pause anytime',
+                              style: TextStyle(fontSize: 12),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -4,6 +4,8 @@ class AppImages {
   static const String vegicon = "assets/images/bx_leaf.png";
   static const String nonvegicon = "assets/images/nonveg.png";
   static const String menuimage = "assets/images/Rectangle 37.png";
+  static const String cardicon = "assets/images/Group.png";
+  static const String codicon = "assets/images/man.png";
   static const List<String> actions = [
     "assets/images/boxVector.png",
     "assets/images/calenderVector.png",
