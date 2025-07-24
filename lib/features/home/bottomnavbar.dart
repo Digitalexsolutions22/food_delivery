@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:go_router/go_router.dart';
 
 class BottomNavShell extends StatefulWidget {
@@ -17,9 +16,10 @@ class _BottomNavShellState extends State<BottomNavShell> {
   int _getCurrentIndex(BuildContext context) {
     final String location = GoRouterState.of(context).uri.path;
     if (location.startsWith('/home')) return 0;
-    if (location.startsWith('/wishlist')) return 1;
-    if (location.startsWith('/profile')) return 2;
-    if (location.startsWith('/cart')) return 3;
+    if (location.startsWith('/menu')) return 1;
+    if (location.startsWith('/plans')) return 2;
+    if (location.startsWith('/orders')) return 3;
+    if (location.startsWith('/profile')) return 4;
     return 0;
   }
 
@@ -29,13 +29,16 @@ class _BottomNavShellState extends State<BottomNavShell> {
         context.go('/home');
         break;
       case 1:
-        context.go('/wishlist');
+        context.go('/menu');
         break;
       case 2:
-        context.go('/profile');
+        context.go('/plans');
         break;
       case 3:
-        context.go('/cart');
+        context.go('/orders');
+        break;
+      case 4:
+        context.go('/profile');
         break;
     }
   }
@@ -54,103 +57,131 @@ class _BottomNavShellState extends State<BottomNavShell> {
 
         log("Current Route: $location");
 
-        if (location == '/profile' ||
-            location == '/wishlist' ||
-            location == '/cart') {
+        if (location != '/home') {
           router.go('/home');
-          log("Redirecting to Home from Profile/Notify/Support");
+          log("Redirecting to Home");
           return;
         }
 
-        if (router.canPop()) {
-          router.pop();
-          return;
-        }
-
-        if (location == '/home') {
-          SystemNavigator.pop();
-        }
+        SystemNavigator.pop();
       },
       child: Scaffold(
         body: widget.child,
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: currentIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: AppColors.gold,
-          selectedItemColor: AppColors.blue,
-          unselectedItemColor: Colors.white,
-          onTap: (index) => _onItemTapped(context, index),
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.favorite),
-              label: 'Wishlist',
+        bottomNavigationBar: Container(
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.2),
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: const Offset(0, -2),
+              ),
+            ],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: currentIndex,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+            selectedItemColor: AppColors.orange,
+            unselectedItemColor: Colors.black54,
+            showSelectedLabels: false,
+            showUnselectedLabels: false,
+            selectedLabelStyle: const TextStyle(fontSize: 0, height: 0),
+            unselectedLabelStyle: const TextStyle(fontSize: 0, height: 0),
+            onTap: (index) => _onItemTapped(context, index),
+            items: [
+              _buildBottomNavItem(
+                icon: Icons.home,
+                label: 'Home',
+                isSelected: currentIndex == 0,
+              ),
+              _buildBottomNavItem(
+                icon: Icons.restaurant_menu,
+                label: 'Menu',
+                isSelected: currentIndex == 1,
+              ),
+              _buildBottomNavItem(
+                icon: Icons.event_note,
+                label: 'Plans',
+                isSelected: currentIndex == 2,
+              ),
+              _buildBottomNavItem(
+                icon: Icons.list_alt,
+                label: 'Orders',
+                isSelected: currentIndex == 3,
+              ),
+              _buildBottomNavItem(
+                icon: Icons.person,
+                label: 'Profile',
+                isSelected: currentIndex == 4,
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingCartButton(
+          onTap: () {
+            context.push('/orders');
+          },
+        ),
+      ),
+    );
+  }
+
+  BottomNavigationBarItem _buildBottomNavItem({
+    required IconData icon,
+    required String label,
+    required bool isSelected,
+  }) {
+    return BottomNavigationBarItem(
+      icon: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+        margin: EdgeInsets.symmetric(vertical: 6),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color:
+              isSelected
+                  ? AppColors.orange.withOpacity(0.1)
+                  : Colors.transparent,
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 24,
+              color: isSelected ? AppColors.orange : Colors.black87,
             ),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_cart),
-              label: 'Cart',
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? AppColors.orange : Colors.black87,
+                fontSize: 11,
+                fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
+              ),
             ),
           ],
         ),
-        floatingActionButton:
-            GoRouterState.of(context).uri.path.startsWith('/cart') ||
-                    GoRouterState.of(context).uri.path.startsWith('/profile')
-                ? null
-                : FloatingCartButton(
-                  onTap: () {
-                    context.push('/cart');
-                  },
-                  cartCount: 1,
-                ),
       ),
+      label: '',
     );
   }
 }
 
-// floating bottun
-
 class FloatingCartButton extends StatelessWidget {
-  final int cartCount;
   final VoidCallback onTap;
 
-  const FloatingCartButton({
-    super.key,
-    required this.cartCount,
-    required this.onTap,
-  });
+  const FloatingCartButton({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
+    return FloatingActionButton(
+      shape: const CircleBorder(),
       onPressed: onTap,
-      backgroundColor: Colors.green,
-      icon: Stack(
-        children: [
-          const Icon(Icons.shopping_cart, size: 30, color: AppColors.white),
-          if (cartCount > 0)
-            Positioned(
-              right: 0,
-              top: 0,
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                  color: AppColors.green,
-                  shape: BoxShape.circle,
-                ),
-                constraints: const BoxConstraints(minWidth: 15, minHeight: 15),
-                child: Center(
-                  child: Text(
-                    '$cartCount',
-                    style: const TextStyle(color: Colors.white, fontSize: 10),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-            ),
-        ],
-      ),
-      label: const MainBody(title: "Go to Cart", fontcolor: AppColors.white),
+      backgroundColor: AppColors.orange,
+      child: const Icon(Icons.shopping_cart, color: AppColors.white, size: 28),
     );
   }
 }

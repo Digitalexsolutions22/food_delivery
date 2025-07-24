@@ -11,24 +11,24 @@ class AppImages {
     "assets/images/supportVector.png",
   ];
   //stars
-  static const String fullistar = "assests/images/ratingstares/fullrating.png";
-  static const String halfstar = "assests/images/ratingstares/halfrating.png";
-  static const String nostar = "assests/images/ratingstares/norating.png";
-  static const String cart = "assests/images/carticon.png";
-  static const String plas = "assests/images/plus.png";
-  static const String subtec = "assests/images/subtraction.png";
-  static const String login = "assests/images/login.png";
-  static const String product1 = "assests/images/product1-removebg-preview.png";
+  static const String fullistar = "assets/images/ratingstares/fullrating.png";
+  static const String halfstar = "assets/images/ratingstares/halfrating.png";
+  static const String nostar = "assets/images/ratingstares/norating.png";
+  static const String cart = "assets/images/carticon.png";
+  static const String plas = "assets/images/plus.png";
+  static const String subtec = "assets/images/subtraction.png";
+  static const String login = "assets/images/login.png";
+  static const String product1 = "assets/images/product1-removebg-preview.png";
   static const String product2 =
-      "assests/images/ratingstares/h3-shop-banner2.webp";
-  static const String product3 = "assests/images/product3.png";
+      "assets/images/ratingstares/h3-shop-banner2.webp";
+  static const String product3 = "assets/images/product3.png";
 
-  static const String home = "assests/images/icons/home-rounded.png";
-  static const String plus = "assests/images/icons/lucide_plus.png";
-  static const String checkbox = "assests/images/icons/carbon_checkbox.png";
-  static const String checkboxfill = "assests/images/icons/checkbox-fill.png";
-  static const String other = "assests/images/icons/other.png";
+  static const String home = "assets/images/icons/home-rounded.png";
+  static const String plus = "assets/images/icons/lucide_plus.png";
+  static const String checkbox = "assets/images/icons/carbon_checkbox.png";
+  static const String checkboxfill = "assets/images/icons/checkbox-fill.png";
+  static const String other = "assets/images/icons/other.png";
   static const String productframe =
-      "assests/images/ratingstares/Group 31 (1).png";
-  static const String threedotsiocn = "assests/images/icons/Vector (10).png";
+      "assets/images/ratingstares/Group 31 (1).png";
+  static const String threedotsiocn = "assets/images/icons/Vector (10).png";
 }

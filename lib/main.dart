@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/features/home/profile/profilescreen.dart';
+import 'package:food_delivery/constants/routs.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,6 +10,13 @@ void main() {
     const SystemUiOverlayStyle(
       statusBarColor: AppColors.orange, // Set your desired color
       statusBarIconBrightness: Brightness.light, // For white icons
+    ),
+  );
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+      systemNavigationBarColor: AppColors.orange,
+      systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
   runApp(const MyApp());
@@ -25,11 +32,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Food delivery',
       theme: ThemeData(),
-      home: ProfileScreen(),
+      routerConfig: goRoute,
     );
   }
 }

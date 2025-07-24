@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
+import 'package:food_delivery/features/home/profile/views/address_listcreen.dart';
+import 'package:food_delivery/features/home/profile/views/privacyscreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -90,7 +92,14 @@ class ProfileScreen extends StatelessWidget {
                       icon: Icons.location_on,
                       title: 'Delivery Addresses',
                       subtitle: '2 saved addresses',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AddressList(),
+                          ),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 20),
@@ -108,7 +117,12 @@ class ProfileScreen extends StatelessWidget {
                     _buildMenuTile(
                       icon: Icons.lock_outline,
                       title: 'Privacy Policy',
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Privacy()),
+                        );
+                      },
                     ),
 
                     const SizedBox(height: 20),
