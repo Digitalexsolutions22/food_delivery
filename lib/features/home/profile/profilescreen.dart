@@ -30,7 +30,8 @@ class ProfileScreen extends StatelessWidget {
                   width: 54,
                   height: 54,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withAlpha(51),
+
                     shape: BoxShape.circle,
                   ),
                   child: const Icon(
@@ -66,7 +67,8 @@ class ProfileScreen extends StatelessWidget {
                       Text(
                         'HSR Layout, Bangalore • 10km radius',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
+                          color: Colors.white.withAlpha(230),
+
                           fontSize: 10,
                           fontWeight: FontWeight.w400,
                         ),

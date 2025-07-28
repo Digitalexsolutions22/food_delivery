@@ -52,7 +52,8 @@ class Homescreen extends StatelessWidget {
                                 'Ready to eat good today?',
                                 style: TextStyle(
                                   fontSize: 14,
-                                  color: Colors.white.withOpacity(0.9),
+                                  color: Colors.white.withAlpha(230),
+
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -61,7 +62,8 @@ class Homescreen extends StatelessWidget {
                                 children: [
                                   Icon(
                                     Icons.location_on_outlined,
-                                    color: Colors.white.withOpacity(0.8),
+                                    color: Colors.white.withAlpha(204),
+
                                     size: 14,
                                   ),
                                   SizedBox(width: 2),
@@ -71,7 +73,7 @@ class Homescreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 10,
-                                      color: Colors.white.withOpacity(0.8),
+                                      color: Colors.white.withAlpha(204),
                                     ),
                                   ),
                                 ],
@@ -87,7 +89,8 @@ class Homescreen extends StatelessWidget {
                               width: 50,
                               height: 50,
                               decoration: BoxDecoration(
-                                color: Colors.white.withOpacity(0.2),
+                                color: Colors.white.withAlpha(51),
+
                                 borderRadius: BorderRadius.circular(25),
                               ),
                               child:
@@ -102,7 +105,8 @@ class Homescreen extends StatelessWidget {
                                           provider.checkDistances();
                                         },
                                         icon: Icon(Icons.location_on),
-                                        color: Colors.white.withOpacity(0.8),
+                                        color: Colors.white.withAlpha(204),
+
                                         iconSize: 24,
                                       ),
                             ),
@@ -125,7 +129,8 @@ class Homescreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
+                                  color: Colors.grey.withAlpha(51),
+
                                   blurRadius: 4,
                                   offset: Offset(0, 10),
                                 ),
@@ -176,9 +181,8 @@ class Homescreen extends StatelessWidget {
                                               vertical: 4,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Colors.blue.withOpacity(
-                                                0.1,
-                                              ),
+                                              color: Colors.blue.withAlpha(26),
+
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -209,9 +213,8 @@ class Homescreen extends StatelessWidget {
                                               vertical: 4,
                                             ),
                                             decoration: BoxDecoration(
-                                              color: Colors.orange.withOpacity(
-                                                0.1,
-                                              ),
+                                              color: Colors.blue.withAlpha(26),
+
                                               borderRadius:
                                                   BorderRadius.circular(20),
                                             ),
@@ -537,7 +540,8 @@ class Homescreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(16),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.black.withOpacity(0.1),
+                                        color: Colors.blue.withAlpha(26),
+
                                         blurRadius: 3,
                                         offset: Offset(0, 4),
                                       ),

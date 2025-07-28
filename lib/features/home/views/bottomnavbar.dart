@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/features/panlsandorders/cart.dart';
+import 'package:food_delivery/features/plansandorders/cart.dart';
 import 'package:go_router/go_router.dart';
 
 class BottomNavShell extends StatefulWidget {
@@ -73,7 +73,8 @@ class _BottomNavShellState extends State<BottomNavShell> {
             color: AppColors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.grey.withAlpha(51),
+
                 spreadRadius: 1,
                 blurRadius: 10,
                 offset: const Offset(0, -2),
@@ -146,9 +147,7 @@ class _BottomNavShellState extends State<BottomNavShell> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color:
-              isSelected
-                  ? AppColors.orange.withOpacity(0.1)
-                  : Colors.transparent,
+              isSelected ? AppColors.orange.withAlpha(26) : Colors.transparent,
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,

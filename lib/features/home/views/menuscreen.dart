@@ -7,10 +7,10 @@ class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
 
   @override
-  _MenuScreenState createState() => _MenuScreenState();
+  MenuScreenState createState() => MenuScreenState();
 }
 
-class _MenuScreenState extends State<MenuScreen> {
+class MenuScreenState extends State<MenuScreen> {
   int selectedCategoryIndex = 0;
   bool isVeg = false;
   @override
@@ -166,7 +166,8 @@ class _MenuScreenState extends State<MenuScreen> {
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.blue.withAlpha(26),
+
             spreadRadius: 1,
             blurRadius: 10,
             offset: Offset(0, 2),

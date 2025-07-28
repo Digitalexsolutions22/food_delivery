@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:food_delivery/features/home/views/location.dart';
 import 'package:geolocator/geolocator.dart';
@@ -63,24 +61,24 @@ class Homeprovider extends ChangeNotifier {
     notifyListeners();
   }
 
-  double _calculateDistance(
-    double lat1,
-    double lon1,
-    double lat2,
-    double lon2,
-  ) {
-    const R = 6371; // Earth radius in km
-    double dLat = _deg2rad(lat2 - lat1);
-    double dLon = _deg2rad(lon2 - lon1);
-    double a =
-        sin(dLat / 2) * sin(dLat / 2) +
-        cos(_deg2rad(lat1)) *
-            cos(_deg2rad(lat2)) *
-            sin(dLon / 2) *
-            sin(dLon / 2);
-    double c = 2 * atan2(sqrt(a), sqrt(1 - a));
-    return R * c;
-  }
+  // double _calculateDistance(
+  //   double lat1,
+  //   double lon1,
+  //   double lat2,
+  //   double lon2,
+  // ) {
+  //   const R = 6371; // Earth radius in km
+  //   double dLat = _deg2rad(lat2 - lat1);
+  //   double dLon = _deg2rad(lon2 - lon1);
+  //   double a =
+  //       sin(dLat / 2) * sin(dLat / 2) +
+  //       cos(_deg2rad(lat1)) *
+  //           cos(_deg2rad(lat2)) *
+  //           sin(dLon / 2) *
+  //           sin(dLon / 2);
+  //   double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+  //   return R * c;
+  // }
 
-  double _deg2rad(double deg) => deg * pi / 180;
+  // double _deg2rad(double deg) => deg * pi / 180;
 }

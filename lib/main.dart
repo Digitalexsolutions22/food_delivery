@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
@@ -47,7 +46,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Food delivery',
-      useInheritedMediaQuery: true, // required for DevicePreview
       locale: DevicePreview.locale(context), // required for DevicePreview
       builder: DevicePreview.appBuilder, // required for DevicePreview
       theme: ThemeData(),

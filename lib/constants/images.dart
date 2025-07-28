@@ -6,6 +6,14 @@ class AppImages {
   static const String menuimage = "assets/images/Rectangle 37.png";
   static const String cardicon = "assets/images/Group.png";
   static const String codicon = "assets/images/man.png";
+  // Animations
+  static const String menuanimation =
+      "assets/images/animations/Food Carousel.json";
+  static const String cartanimation = "assets/images/animations/Food.json";
+  static const String promoanimation =
+      "assets/images/animations/Confetti Rain v2.json";
+  static const String foodpreparedanimation =
+      "assets/images/animations/Food Prepared.json";
   static const List<String> actions = [
     "assets/images/boxVector.png",
     "assets/images/calenderVector.png",

@@ -2,8 +2,8 @@ import 'package:food_delivery/features/home/views/bottomnavbar.dart';
 import 'package:food_delivery/features/home/views/homescreen.dart';
 import 'package:food_delivery/features/home/views/menuscreen.dart';
 import 'package:food_delivery/features/home/profile/profilescreen.dart';
-import 'package:food_delivery/features/panlsandorders/views/myorderscren.dart';
-import 'package:food_delivery/features/panlsandorders/views/plans.dart';
+import 'package:food_delivery/features/plansandorders/views/myorderscren.dart';
+import 'package:food_delivery/features/plansandorders/views/plans.dart';
 import 'package:food_delivery/main.dart';
 import 'package:go_router/go_router.dart';
 

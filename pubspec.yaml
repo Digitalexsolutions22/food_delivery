@@ -44,6 +44,7 @@ dependencies:
   geolocator: ^14.0.2
   geocoding: ^4.0.0
   device_preview: ^1.2.0
+  lottie: ^3.3.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
     - assets/images/ratingstares/
     - assets/images/icons/
     - assets/images1/
+    - assets/images/animations/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -11,6 +11,8 @@ class Restaurant {
 }
 
 class LocationChecker extends StatefulWidget {
+  const LocationChecker({super.key});
+
   @override
   State<LocationChecker> createState() => _LocationCheckerState();
 }
@@ -26,8 +28,12 @@ class _LocationCheckerState extends State<LocationChecker> {
 
   Future<void> checkDistances() async {
     try {
+      LocationSettings locationSettings = LocationSettings(
+        accuracy: LocationAccuracy.high,
+        distanceFilter: 10,
+      );
       Position user = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high,
+        locationSettings: locationSettings,
       );
 
       String output =
@@ -78,8 +84,8 @@ class _LocationCheckerState extends State<LocationChecker> {
     appBar: AppBar(title: Text("Nearby Restaurants")),
     body: Padding(padding: EdgeInsets.all(16), child: Text(result)),
     floatingActionButton: FloatingActionButton(
-      child: Icon(Icons.location_on),
       onPressed: checkDistances,
+      child: Icon(Icons.location_on),
     ),
   );
 }
