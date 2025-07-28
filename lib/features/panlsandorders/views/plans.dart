@@ -421,6 +421,7 @@ class _PlansScreenState extends State<PlansScreen>
                       ),
                     ],
                   ),
+                  SizedBox(height: 70),
                 ],
               ),
             ),

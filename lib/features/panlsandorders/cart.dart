@@ -104,7 +104,7 @@ class _CartSceeenState extends State<CartSceeen> {
                           ),
                         ),
                         Divider(thickness: 1, color: AppColors.lightGrey),
-                        SizedBox(height: 20),
+                        SizedBox(height: 10),
                         ListView.builder(
                           padding: EdgeInsets.zero,
                           physics: NeverScrollableScrollPhysics(),
@@ -114,129 +114,115 @@ class _CartSceeenState extends State<CartSceeen> {
                             return Padding(
                               padding: const EdgeInsets.only(bottom: 10),
                               child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        height: 70,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            20,
-                                          ),
-                                          color: AppColors.black,
-                                        ),
+                                  Container(
+                                    height: 77,
+                                    width: 77,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: AppColors.black,
+                                    ),
 
-                                        child: ClipRRect(
-                                          borderRadius: BorderRadius.circular(
-                                            10,
-                                          ),
-                                          child: Image.asset(
-                                            AppImages1.productimage,
-                                            fit: BoxFit.cover,
-                                          ),
-                                        ),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(10),
+                                      child: Image.asset(
+                                        AppImages1.productimage,
+                                        fit: BoxFit.cover,
                                       ),
-                                      SizedBox(width: 10),
-                                      SizedBox(
-                                        height: 70,
-                                        width: 100,
-                                        child: Column(
-                                          mainAxisSize: MainAxisSize.max,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            MainBody(
-                                              title: "Poha with Sev",
-                                              maxlines: 2,
-                                              applymaxlines: true,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400,
-                                              fontcolor: AppColors.black,
-                                            ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        MainBody(
+                                          title: "Poha with Sev",
+                                          maxlines: 2,
+                                          applymaxlines: true,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          fontcolor: AppColors.black,
+                                        ),
 
-                                            MainBody(
-                                              title: "₹65",
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w400,
-                                              fontcolor: AppColors.orange,
+                                        MainBody(
+                                          title: "₹65",
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          fontcolor: AppColors.orange,
+                                        ),
+                                        SizedBox(height: 10),
+                                        Row(
+                                          children: [
+                                            SizedBox(width: 10),
+                                            GestureDetector(
+                                              onTap: () {
+                                                if (quantity > 1) {
+                                                  setState(() {
+                                                    quantity--;
+                                                  });
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 27,
+                                                height: 27,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[200],
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  size: 18,
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 16,
+                                              ),
+                                              child: Text(
+                                                '$quantity',
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                setState(() {
+                                                  quantity++;
+                                                });
+                                              },
+                                              child: Container(
+                                                width: 26,
+                                                height: 26,
+                                                decoration: BoxDecoration(
+                                                  color: AppColors.orange,
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Colors.white,
+                                                  size: 18,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(width: 20),
+                                            GestureDetector(
+                                              onTap: () {},
+                                              child: Image.asset(
+                                                AppImages1.delete,
+                                                scale: 4,
+                                                color: AppColors.orange,
+                                              ),
                                             ),
                                           ],
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          if (quantity > 1) {
-                                            setState(() {
-                                              quantity--;
-                                            });
-                                          }
-                                        },
-                                        child: Container(
-                                          width: 32,
-                                          height: 32,
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[200],
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Icon(Icons.remove, size: 18),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 16,
-                                        ),
-                                        child: Text(
-                                          '$quantity',
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
-                                          setState(() {
-                                            quantity++;
-                                          });
-                                        },
-                                        child: Container(
-                                          width: 32,
-                                          height: 32,
-                                          decoration: BoxDecoration(
-                                            color: AppColors.orange,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Icon(
-                                            Icons.add,
-                                            color: Colors.white,
-                                            size: 18,
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(width: 8),
-                                      GestureDetector(
-                                        onTap: () {
-                                          // Handle delete
-                                        },
-                                        child: Image.asset(
-                                          AppImages1.delete,
-                                          scale: 3,
-                                          color: AppColors.orange,
-                                        ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
@@ -599,7 +585,7 @@ class _CartSceeenState extends State<CartSceeen> {
         });
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 12),
         decoration: BoxDecoration(
           color: isSelected ? AppColors.orange : Colors.grey[100],
           borderRadius: BorderRadius.circular(8),

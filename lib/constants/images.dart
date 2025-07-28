@@ -12,6 +12,18 @@ class AppImages {
     "assets/images/profilevector.png",
     "assets/images/supportVector.png",
   ];
+  static const List<String> actionstext = [
+    "My Orders",
+    "Active plan",
+    "Profile",
+    "Support",
+  ];
+  static const List<String> actionssubtext = [
+    "2 active",
+    "Weekly",
+    "View",
+    "6 am - 12 pm",
+  ];
   //stars
   static const String fullistar = "assets/images/ratingstares/fullrating.png";
   static const String halfstar = "assets/images/ratingstares/halfrating.png";

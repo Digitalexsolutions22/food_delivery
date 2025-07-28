@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/constants/fonts.dart';
 import 'package:food_delivery/constants/inputfield.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/hepler/mediahelper.dart';
@@ -9,42 +8,9 @@ Future<void> address(BuildContext context, bool homeexist) {
   final formKey = GlobalKey<FormState>();
   final receiverNameController = TextEditingController();
   final addressController = TextEditingController();
-  final cityController = TextEditingController();
+  final doorController = TextEditingController();
   final mobileController = TextEditingController();
-  final postcodeController = TextEditingController();
   final landmarkController = TextEditingController();
-  String? selectedState;
-
-  final List<String> states = [
-    'Andhra Pradesh',
-    'Arunachal Pradesh',
-    'Assam',
-    'Bihar',
-    'Chhattisgarh',
-    'Goa',
-    'Gujarat',
-    'Haryana',
-    'Himachal Pradesh',
-    'Jharkhand',
-    'Karnataka',
-    'Kerala',
-    'Madhya Pradesh',
-    'Maharashtra',
-    'Manipur',
-    'Meghalaya',
-    'Mizoram',
-    'Nagaland',
-    'Odisha',
-    'Punjab',
-    'Rajasthan',
-    'Sikkim',
-    'Tamil Nadu',
-    'Telangana',
-    'Tripura',
-    'Uttar Pradesh',
-    'Uttarakhand',
-    'West Bengal',
-  ];
 
   return showModalBottomSheet(
     context: context,
@@ -142,7 +108,15 @@ Future<void> address(BuildContext context, bool homeexist) {
 
                     InputField(
                       controller: receiverNameController,
-                      hintText: "Receivers Name",
+                      hintText: "Receivers Name*",
+                      borderRadius: 5,
+                      height: 50,
+                    ),
+                    SizedBox(height: 10),
+
+                    InputField(
+                      controller: doorController,
+                      hintText: "Door No*",
                       borderRadius: 5,
                       height: 50,
                     ),
@@ -150,15 +124,7 @@ Future<void> address(BuildContext context, bool homeexist) {
 
                     InputField(
                       controller: addressController,
-                      hintText: "Complete address",
-                      borderRadius: 5,
-                      height: 50,
-                    ),
-                    SizedBox(height: 10),
-
-                    InputField(
-                      controller: cityController,
-                      hintText: "City",
+                      hintText: "Complete address*",
                       borderRadius: 5,
                       height: 50,
                     ),
@@ -166,81 +132,10 @@ Future<void> address(BuildContext context, bool homeexist) {
 
                     InputField(
                       controller: mobileController,
-                      hintText: "Mobile Number",
+                      hintText: "Mobile Number*",
                       keyboardType: TextInputType.numberWithOptions(),
                       borderRadius: 5,
                       height: 50,
-                    ),
-                    SizedBox(height: 10),
-
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonFormField<String>(
-                            isExpanded: true,
-                            value: selectedState,
-                            hint: Text(
-                              "Select State",
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                fontFamily: AppFonts.roboto,
-                                fontSize: 13,
-                                color: AppColors.gray,
-                              ),
-                            ),
-                            decoration: InputDecoration(
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16,
-                                vertical: 12,
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: BorderSide(
-                                  color: AppColors.gray,
-                                  width: 1.5,
-                                ),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                                borderSide: BorderSide(
-                                  color: Colors.green,
-                                  width: 2,
-                                ),
-                              ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                            ),
-                            items:
-                                states.map((String state) {
-                                  return DropdownMenuItem<String>(
-                                    value: state,
-                                    child: Text(
-                                      state,
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 1,
-                                    ),
-                                  );
-                                }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                selectedState = newValue;
-                              });
-                            },
-                          ),
-                        ),
-                        SizedBox(width: 10),
-                        Expanded(
-                          child: InputField(
-                            controller: postcodeController,
-                            hintText: "Post code",
-                            keyboardType: TextInputType.numberWithOptions(),
-                            borderRadius: 5,
-                            height: 50,
-                          ),
-                        ),
-                      ],
                     ),
                     SizedBox(height: 10),
 

@@ -49,12 +49,12 @@ class _MyorderScreenState extends State<MyorderScreen> {
                             _handleTap(Myorders.currentorder);
                           },
                           child: Container(
-                            height: 50,
+                            height: 46,
                             width: 200,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: AppColors.orange,
-                                width: 2,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -83,7 +83,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                   child: MainBody(
                                     title: "Current Orders",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.bold,
                                     fontcolor:
                                         screentype == Myorders.currentorder
                                             ? AppColors.white
@@ -104,12 +104,12 @@ class _MyorderScreenState extends State<MyorderScreen> {
                             _handleTap(Myorders.orderhisstory);
                           },
                           child: Container(
-                            height: 50,
+                            height: 46,
                             width: 200,
                             decoration: BoxDecoration(
                               border: Border.all(
                                 color: AppColors.orange,
-                                width: 2,
+                                width: 1,
                               ),
                               borderRadius: BorderRadius.circular(10),
                             ),
@@ -138,7 +138,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                   child: MainBody(
                                     title: "Order History",
                                     fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                    fontWeight: FontWeight.bold,
                                     fontcolor:
                                         screentype == Myorders.orderhisstory
                                             ? AppColors.white
@@ -179,9 +179,9 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                     Row(
                                       children: [
                                         MainBody(
-                                          title: "Order ",
+                                          title: "Order",
                                           fontSize: 14,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.bold,
                                           fontcolor: AppColors.black,
                                         ),
                                         MainBody(
@@ -199,29 +199,29 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 16),
                                 MainBody(
                                   title: "Homestyle Dal Chawal",
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                   fontcolor: AppColors.black,
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 4),
                                 MainBody(
                                   title: "Quantity: 1 • ₹120",
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  fontcolor: AppColors.gray,
+                                  fontcolor: Colors.black54,
                                 ),
                                 SizedBox(height: 20),
                                 Container(
                                   padding: EdgeInsets.symmetric(
                                     horizontal: 8,
-                                    vertical: 6,
+                                    vertical: 8,
                                   ),
                                   decoration: BoxDecoration(
+                                    border: Border.all(width: 0.1),
                                     borderRadius: BorderRadius.circular(10),
-                                    color: AppColors.grayLight,
+                                    color: Color(0xFFF7F7F7),
                                   ),
                                   child: Column(
                                     children: [
@@ -238,9 +238,9 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                           MainBody(
                                             title:
                                                 "Estimated delivery: 15-20 min",
-                                            fontSize: 11,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w500,
-                                            fontcolor: AppColors.gray,
+                                            fontcolor: Colors.black54,
                                           ),
                                         ],
                                       ),
@@ -257,16 +257,16 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                           SizedBox(width: 5),
                                           MainBody(
                                             title: "HSR Layout, Sector 1",
-                                            fontSize: 11,
+                                            fontSize: 12,
                                             fontWeight: FontWeight.w500,
-                                            fontcolor: AppColors.gray,
+                                            fontcolor: Colors.black54,
                                           ),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 10),
                                 Container(
                                   padding: EdgeInsets.symmetric(vertical: 8),
                                   width: double.infinity,
@@ -277,7 +277,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                   child: Center(
                                     child: MainBody(
                                       title: "Call Now",
-                                      fontSize: 11,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w500,
                                       fontcolor: AppColors.orange,
                                     ),
@@ -314,9 +314,9 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                     Row(
                                       children: [
                                         MainBody(
-                                          title: "Order ",
+                                          title: "Order",
                                           fontSize: 14,
-                                          fontWeight: FontWeight.w500,
+                                          fontWeight: FontWeight.bold,
                                           fontcolor: AppColors.black,
                                         ),
                                         MainBody(
@@ -329,32 +329,32 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                     ),
 
                                     StatusTag(
-                                      title: 'Preparing',
+                                      title: 'Delivered',
                                       backgroundColor: AppColors.freshGreen,
                                       fontcolor: AppColors.white,
                                     ),
                                   ],
                                 ),
-                                SizedBox(height: 20),
+                                SizedBox(height: 16),
                                 MainBody(
                                   title: "Homestyle Dal Chawal",
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
                                   fontcolor: AppColors.black,
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 4),
                                 MainBody(
                                   title: "Quantity: 1 • ₹120",
                                   fontSize: 14,
                                   fontWeight: FontWeight.w500,
-                                  fontcolor: AppColors.gray,
+                                  fontcolor: Colors.black54,
                                 ),
-                                SizedBox(height: 10),
+                                SizedBox(height: 6),
                                 MainBody(
                                   title: "2 Hours Ago",
                                   fontSize: 12,
                                   fontWeight: FontWeight.w500,
-                                  fontcolor: AppColors.gray,
+                                  fontcolor: Colors.black54,
                                 ),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.end,

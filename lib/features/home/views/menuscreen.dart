@@ -23,52 +23,11 @@ class _MenuScreenState extends State<MenuScreen> {
           child: CustomScrollView(
             slivers: [
               // Title
-              Menuheader(
-                title: "Subscriptions",
-                subtitle: "Choose a plan that suits your lifestyle",
-              ),
+              Menuheader(title: "Our Menu"),
               SliverToBoxAdapter(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 10),
-                    Text(
-                      'Our Menu',
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black,
-                      ),
-                    ),
-                    SizedBox(height: 10),
-                    // Search Bar
-                    Container(
-                      height: 53,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'Search For dishes',
-                          hintStyle: TextStyle(
-                            color: Colors.grey[500],
-                            fontSize: 18,
-                          ),
-                          prefixIcon: Image.asset(
-                            AppImages.searchiconthin,
-                            scale: 2.2,
-                          ),
-                          border: InputBorder.none,
-                          isCollapsed: true,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 13,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 16),
                     // Veg/Non-Veg Toggle
                     Row(
                       children: [
