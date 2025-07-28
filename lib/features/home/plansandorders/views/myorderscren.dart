@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/enms.dart';
-import 'package:food_delivery/constants/images1.dart';
+import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/continerdecoration.dart';
@@ -230,9 +230,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                           SizedBox(
                                             height: 15,
                                             width: 15,
-                                            child: Image.asset(
-                                              AppImages1.clock,
-                                            ),
+                                            child: Image.asset(AppImages.clock),
                                           ),
                                           SizedBox(width: 5),
                                           MainBody(
@@ -251,7 +249,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                             height: 15,
                                             width: 15,
                                             child: Image.asset(
-                                              AppImages1.location,
+                                              AppImages.location,
                                             ),
                                           ),
                                           SizedBox(width: 5),

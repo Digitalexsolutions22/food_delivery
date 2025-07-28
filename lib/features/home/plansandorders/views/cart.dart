@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
-import 'package:food_delivery/constants/images1.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/continerdecoration.dart';
 import 'package:lottie/lottie.dart';
@@ -147,7 +146,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               child: Image.asset(
-                                                AppImages1.productimage,
+                                                AppImages.productimage,
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -246,7 +245,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                     GestureDetector(
                                                       onTap: () {},
                                                       child: Image.asset(
-                                                        AppImages1.delete,
+                                                        AppImages.delete,
                                                         scale: 4,
                                                         color: AppColors.orange,
                                                       ),

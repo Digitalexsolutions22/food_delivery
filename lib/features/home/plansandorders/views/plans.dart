@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/constants/images1.dart';
+import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/animations.dart/hearbeetanimation.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
@@ -137,7 +137,7 @@ class _PlansScreenState extends State<PlansScreen>
                           Divider(thickness: 1, color: AppColors.lightGrey),
                           Row(
                             children: [
-                              Image.asset(AppImages1.clock, scale: 3),
+                              Image.asset(AppImages.clock, scale: 3),
                               SizedBox(width: 10),
                               MainBody(
                                 title: "Next delivery: Tomorrow, 12:30 PM",
@@ -234,7 +234,7 @@ class _PlansScreenState extends State<PlansScreen>
                                             child: Row(
                                               children: [
                                                 Image.asset(
-                                                  AppImages1.rightcheck,
+                                                  AppImages.rightcheck,
                                                   scale: 3,
                                                 ),
                                                 SizedBox(width: 10),

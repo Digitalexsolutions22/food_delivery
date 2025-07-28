@@ -53,4 +53,13 @@ class AppImages {
   static const String productframe =
       "assets/images/ratingstares/Group 31 (1).png";
   static const String threedotsiocn = "assets/images/icons/Vector (10).png";
+
+  static const String clock = "assets/images/weui_time-outlined.png";
+  static const String rightcheck = "assets/images/Vector (29).png";
+  static const String location = "assets/images/Vector (30).png";
+  static const String productimage =
+      "assets/images/a37f6b485ecfa19c7947f5cf012c4d6f64724d80.jpg";
+  static const String subtract = "assets/images/Vector (31).png";
+  static const String delete = "assets/images/weui_delete-outlined.png";
+  static const String tag = "assets/images/Vector (32).png";
 }
