@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'dart:developer';
 
@@ -121,24 +122,70 @@ class Menuheader extends StatelessWidget {
                     color: Colors.grey[100],
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search For dishes',
-                      hintStyle: TextStyle(
-                        color: Colors.grey[500],
-                        fontSize: 18,
+                  child: Stack(
+                    alignment: Alignment.centerLeft,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 54.0, top: 3),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Search for ',
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 18,
+                              ),
+                            ),
+                            AnimatedTextKit(
+                              repeatForever: true,
+                              pause: const Duration(milliseconds: 400),
+                              animatedTexts: [
+                                FadeAnimatedText(
+                                  'Dishes',
+                                  textStyle: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                  duration: Duration(milliseconds: 1200),
+                                ),
+                                FadeAnimatedText(
+                                  'Biryani',
+                                  textStyle: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                  duration: Duration(milliseconds: 1200),
+                                ),
+                                FadeAnimatedText(
+                                  'Paratha',
+                                  textStyle: const TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                  ),
+                                  duration: Duration(milliseconds: 1200),
+                                ),
+                              ],
+                              isRepeatingAnimation: true,
+                            ),
+                          ],
+                        ),
                       ),
-                      prefixIcon: Image.asset(
-                        AppImages.searchiconthin,
-                        scale: 2.2,
+                      TextField(
+                        decoration: InputDecoration(
+                          prefixIcon: Image.asset(
+                            AppImages.searchiconthin,
+                            scale: 2.2,
+                          ),
+                          border: InputBorder.none,
+                          isCollapsed: true,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 13,
+                          ),
+                        ),
+                        style: TextStyle(fontSize: 18),
                       ),
-                      border: InputBorder.none,
-                      isCollapsed: true,
-                      contentPadding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 13,
-                      ),
-                    ),
+                    ],
                   ),
                 ),
               ],

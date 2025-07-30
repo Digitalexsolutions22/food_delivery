@@ -6,7 +6,7 @@ import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:provider/provider.dart';
 import 'package:device_preview/device_preview.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(
@@ -15,23 +15,13 @@ void main() {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  runApp(
-    MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => Homeprovider())],
-      child: const MyApp(),
-    ),
-  );
-
+  // // If you want to use DevicePreview with ShowCaseWidget:
   // runApp(
-  //   DevicePreview(
-  //     enabled: !kReleaseMode,
-  //     builder:
-  //         (context) => MultiProvider(
-  //           providers: [ChangeNotifierProvider(create: (_) => Homeprovider())],
-  //           child: const MyApp(),
-  //         ),
-  //   ),
+  //   DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp()),
   // );
+  runApp(const MyApp());
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -43,13 +33,33 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      title: 'Food delivery',
-      locale: DevicePreview.locale(context), // required for DevicePreview
-      builder: DevicePreview.appBuilder, // required for DevicePreview
-      theme: ThemeData(),
-      routerConfig: goRoute,
-    );
+    var shortestSide = MediaQuery.of(context).size.shortestSide;
+    bool isTablet = shortestSide >= 600;
+    return isTablet
+        ? SizedBox()
+        : MultiProvider(
+          providers: [ChangeNotifierProvider(create: (_) => Homeprovider())],
+          child: Builder(
+            builder:
+                (context) => MediaQuery(
+                  data: MediaQuery.of(context).copyWith(
+                    textScaler: const TextScaler.linear(
+                      1.0,
+                    ), // ✅ Locks text scaling
+                  ),
+                  child: MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    scaffoldMessengerKey: scaffoldMessengerKey,
+                    title: 'Flutter Demo',
+                    theme: ThemeData(
+                      colorScheme: ColorScheme.fromSeed(
+                        seedColor: AppColors.deepGreen,
+                      ),
+                    ),
+                    routerConfig: goRoute,
+                  ),
+                ),
+          ),
+        );
   }
 }

@@ -50,6 +50,7 @@ class _PlansScreenState extends State<PlansScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 10),
                   // active plan
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -100,14 +101,14 @@ class _PlansScreenState extends State<PlansScreen>
                                 children: [
                                   MainBody(
                                     title: "4",
-                                    fontSize: 14,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontcolor: AppColors.orange,
                                   ),
                                   SizedBox(height: 5),
                                   MainBody(
                                     title: "Days Left",
-                                    fontSize: 14,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w500,
                                     fontcolor: AppColors.gray,
                                   ),

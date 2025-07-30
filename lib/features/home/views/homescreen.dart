@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
@@ -6,9 +8,42 @@ import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:food_delivery/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class Homescreen extends StatelessWidget {
+class Homescreen extends StatefulWidget {
   const Homescreen({super.key});
+
+  @override
+  State<Homescreen> createState() => _HomescreenState();
+}
+
+class _HomescreenState extends State<Homescreen> {
+  final PageController _controller = PageController();
+  int _currentPage = 0;
+  final int _totalPages = 5;
+
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(Duration(seconds: 3), (Timer timer) {
+      if (_currentPage < _totalPages - 1) {
+        _currentPage++;
+      } else {
+        _currentPage = 0;
+      }
+      _controller.animateToPage(
+        _currentPage,
+        duration: Duration(milliseconds: 900),
+        curve: Curves.easeInOut,
+      );
+    });
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,208 +152,250 @@ class Homescreen extends StatelessWidget {
 
                     // Food card
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 22),
+                      padding: EdgeInsets.symmetric(horizontal: 12),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Container(
-                            height: 346,
-                            width: double.infinity,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withAlpha(51),
+                          SizedBox(
+                            height: 350,
+                            child: PageView(
+                              controller: _controller,
 
-                                  blurRadius: 4,
-                                  offset: Offset(0, 10),
-                                ),
-                              ],
-                            ),
-                            child: Column(
-                              children: [
-                                // Image without any padding or spacing
-                                ClipRRect(
-                                  borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(20),
-                                    topRight: Radius.circular(20),
+                              scrollDirection: Axis.horizontal,
+                              children: List.generate(
+                                5,
+                                (index) => Container(
+                                  height: 340,
+                                  width: double.infinity,
+                                  margin: EdgeInsets.all(6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withAlpha(51),
+
+                                        blurRadius: 4,
+                                        offset: Offset(0, 10),
+                                      ),
+                                    ],
                                   ),
-                                  child: Image.asset(
-                                    AppImages.homeimage,
-                                    height: 165,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(16.0),
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        'Rajma Chawal + Roti',
-                                        style: TextStyle(
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.black87,
+                                      // Image without any padding or spacing
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(20),
+                                          topRight: Radius.circular(20),
+                                        ),
+                                        child: Image.asset(
+                                          AppImages.homeimage,
+                                          height: 165,
+                                          fit: BoxFit.cover,
                                         ),
                                       ),
-                                      Text(
-                                        'Creamy kidney bean curry with basmati rice & fresh roti',
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: Colors.grey[600],
-                                          height: 1.4,
-                                        ),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Row(
-                                        children: [
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 4,
+                                      Padding(
+                                        padding: const EdgeInsets.all(14.0),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              'Rajma Chawal + Roti',
+                                              style: TextStyle(
+                                                fontSize: 17,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black87,
+                                              ),
                                             ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue.withAlpha(26),
-
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
+                                            Text(
+                                              'Creamy kidney bean curry with basmati rice & fresh roti',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                color: Colors.grey[600],
+                                                height: 1.4,
+                                              ),
                                             ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
+                                            SizedBox(height: 8),
+                                            Row(
                                               children: [
-                                                Icon(
-                                                  Icons.access_time,
-                                                  size: 16,
-                                                  color: Colors.blue,
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 4,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.blue
+                                                        .withAlpha(26),
+
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          20,
+                                                        ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.access_time,
+                                                        size: 16,
+                                                        color: Colors.blue,
+                                                      ),
+                                                      SizedBox(width: 4),
+                                                      Text(
+                                                        '25-30 min',
+                                                        style: TextStyle(
+                                                          color: Colors.blue,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
-                                                SizedBox(width: 4),
-                                                Text(
-                                                  '25-30 min',
-                                                  style: TextStyle(
-                                                    color: Colors.blue,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
+                                                SizedBox(width: 10),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 8,
+                                                    vertical: 4,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.blue
+                                                        .withAlpha(26),
+
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                          20,
+                                                        ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.star,
+                                                        size: 16,
+                                                        color: Colors.orange,
+                                                      ),
+                                                      SizedBox(width: 4),
+                                                      Text(
+                                                        '4.8',
+                                                        style: TextStyle(
+                                                          color: Colors.orange,
+                                                          fontSize: 13,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ],
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                          ),
-                                          SizedBox(width: 10),
-                                          Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 8,
-                                              vertical: 4,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.blue.withAlpha(26),
-
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
+                                            SizedBox(height: 10),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
-                                                Icon(
-                                                  Icons.star,
-                                                  size: 16,
-                                                  color: Colors.orange,
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      '₹180',
+                                                      style: TextStyle(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[400],
+                                                        decoration:
+                                                            TextDecoration
+                                                                .lineThrough,
+                                                      ),
+                                                    ),
+                                                    SizedBox(width: 4),
+                                                    Text(
+                                                      '₹149',
+                                                      style: TextStyle(
+                                                        fontSize: 17,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        color: Colors.orange,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                                SizedBox(width: 4),
-                                                Text(
-                                                  '4.8',
-                                                  style: TextStyle(
-                                                    color: Colors.orange,
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      SizedBox(height: 10),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                '₹180',
-                                                style: TextStyle(
-                                                  fontSize: 13,
-                                                  color: Colors.grey[400],
-                                                  decoration:
-                                                      TextDecoration
-                                                          .lineThrough,
-                                                ),
-                                              ),
-                                              SizedBox(width: 4),
-                                              Text(
-                                                '₹149',
-                                                style: TextStyle(
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.orange,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 40,
-                                            child: ElevatedButton(
-                                              onPressed: () {},
-                                              style: ElevatedButton.styleFrom(
-                                                backgroundColor:
-                                                    AppColors.orange,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                elevation: 0,
-                                                padding: EdgeInsets.symmetric(
-                                                  horizontal: 24,
-                                                  vertical: 6,
-                                                ),
-                                              ),
-                                              child: Row(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons
-                                                        .shopping_cart_outlined,
-                                                    color: AppColors.cream,
-                                                    size: 18,
-                                                  ),
-                                                  SizedBox(width: 8),
-                                                  Text(
-                                                    'Order Now',
-                                                    style: TextStyle(
-                                                      color: Colors.white,
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w600,
+                                                SizedBox(
+                                                  height: 40,
+                                                  child: ElevatedButton(
+                                                    onPressed: () {},
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          AppColors.orange,
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              10,
+                                                            ),
+                                                      ),
+                                                      elevation: 0,
+                                                      padding:
+                                                          EdgeInsets.symmetric(
+                                                            horizontal: 24,
+                                                            vertical: 6,
+                                                          ),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: [
+                                                        Icon(
+                                                          Icons
+                                                              .shopping_cart_outlined,
+                                                          color:
+                                                              AppColors.cream,
+                                                          size: 18,
+                                                        ),
+                                                        SizedBox(width: 8),
+                                                        Text(
+                                                          'Order Now',
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
-                          SizedBox(height: 32),
+                          SizedBox(height: 10),
+                          Center(
+                            child: SmoothPageIndicator(
+                              controller: _controller,
+                              count: 5,
+                              effect: WormEffect(
+                                dotColor: AppColors.yellow,
+                                activeDotColor: Colors.red,
+                                dotHeight: 3,
+                                dotWidth: 12,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 26),
                           GestureDetector(
                             onTap: () {
                               navigatorKey.currentContext?.go('/plans');
@@ -328,7 +405,7 @@ class Homescreen extends StatelessWidget {
                               children: [
                                 MainBody(
                                   title: "Meal Packages",
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 Row(
@@ -349,7 +426,7 @@ class Homescreen extends StatelessWidget {
                               ],
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 12),
                           SizedBox(
                             height: 154,
                             child: ListView.builder(
@@ -418,10 +495,10 @@ class Homescreen extends StatelessWidget {
                           SizedBox(height: 24),
                           MainBody(
                             title: "Quick Actions",
-                            fontSize: 14,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 12),
                           SizedBox(
                             height: 150,
                             child: GridView.builder(
@@ -433,7 +510,7 @@ class Homescreen extends StatelessWidget {
                                     crossAxisCount: 2,
                                     crossAxisSpacing: 12,
                                     mainAxisSpacing: 10,
-                                    mainAxisExtent: 64,
+                                    mainAxisExtent: 66,
                                   ),
 
                               itemBuilder: (context, index) {
@@ -441,12 +518,9 @@ class Homescreen extends StatelessWidget {
                                   margin: EdgeInsets.all(0),
                                   padding: EdgeInsets.symmetric(horizontal: 20),
                                   width: 157,
-                                  height: 62,
+                                  height: 64,
                                   decoration: BoxDecoration(
-                                    color:
-                                        index > 1
-                                            ? AppColors.blueTransparent
-                                            : AppColors.yellowTransparent,
+                                    color: AppColors.actions[index],
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Row(
@@ -460,7 +534,7 @@ class Homescreen extends StatelessWidget {
                                         ),
                                         child: Image.asset(
                                           AppImages.actions[index],
-                                          scale: 1.8,
+                                          scale: 1.7,
                                         ),
                                       ),
                                       SizedBox(width: 10),
@@ -471,7 +545,7 @@ class Homescreen extends StatelessWidget {
                                           SizedBox(height: 14),
                                           MainBody(
                                             title: AppImages.actionstext[index],
-                                            fontSize: 13,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold,
                                           ),
                                           SizedBox(height: 2),
@@ -488,7 +562,7 @@ class Homescreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          SizedBox(height: 10),
+                          SizedBox(height: 12),
                           GestureDetector(
                             onTap: () {
                               navigatorKey.currentContext?.go('/menu');
@@ -498,7 +572,7 @@ class Homescreen extends StatelessWidget {
                               children: [
                                 MainBody(
                                   title: "Today’s Specials",
-                                  fontSize: 14,
+                                  fontSize: 15,
                                   fontWeight: FontWeight.bold,
                                 ),
                                 Row(
@@ -520,7 +594,7 @@ class Homescreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(
-                            height: 190,
+                            height: 210,
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
                               padding: EdgeInsets.only(
@@ -533,14 +607,14 @@ class Homescreen extends StatelessWidget {
                               itemCount: 6,
                               itemBuilder: (context, index) {
                                 return Container(
-                                  width: 150,
+                                  width: 160,
                                   margin: EdgeInsets.only(right: 12, left: 0),
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     borderRadius: BorderRadius.circular(16),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.blue.withAlpha(26),
+                                        color: Colors.blue.withAlpha(50),
 
                                         blurRadius: 3,
                                         offset: Offset(0, 4),
@@ -563,108 +637,112 @@ class Homescreen extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(6.0),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                    horizontal: 8.0,
-                                                  ),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    'Chicken Biryani',
-                                                    style: TextStyle(
-                                                      fontSize: 13,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: Colors.black87,
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                      horizontal: 4.0,
                                                     ),
-                                                    maxLines: 2,
-                                                  ),
-                                                  SizedBox(height: 4),
-                                                  Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      Text(
-                                                        '₹149',
-                                                        style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.black,
-                                                        ),
-                                                      ),
-                                                      Row(
-                                                        children: [
-                                                          Icon(
-                                                            Icons.star,
-                                                            size: 16,
-                                                            color:
-                                                                Colors.orange,
-                                                          ),
-                                                          Text(
-                                                            '4.8',
-                                                            style: TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 13,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                            SizedBox(height: 8),
-                                            SizedBox(
-                                              height: 32,
-                                              width: 136,
-                                              child: ElevatedButton(
-                                                onPressed: () {},
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor:
-                                                      AppColors.orange,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          8,
-                                                        ),
-                                                  ),
-                                                  elevation: 0,
-                                                  padding: EdgeInsets.symmetric(
-                                                    horizontal: 12,
-                                                  ),
-                                                ),
-                                                child: Row(
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Text(
-                                                      'Add to cart',
+                                                      'Chicken Biryani',
                                                       style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                        fontSize: 14,
                                                       ),
+                                                      maxLines: 2,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                    SizedBox(height: 4),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        Text(
+                                                          '₹149',
+                                                          style: TextStyle(
+                                                            fontSize: 12,
+                                                            color: Colors.black,
+                                                          ),
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.star,
+                                                              size: 16,
+                                                              color:
+                                                                  Colors.orange,
+                                                            ),
+                                                            Text(
+                                                              '4.8',
+                                                              style: TextStyle(
+                                                                color:
+                                                                    Colors
+                                                                        .black,
+                                                                fontSize: 13,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
                                                   ],
                                                 ),
                                               ),
-                                            ),
-                                          ],
+                                              Spacer(),
+                                              SizedBox(
+                                                height: 32,
+                                                width: 146,
+                                                child: ElevatedButton(
+                                                  onPressed: () {},
+                                                  style: ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        AppColors.orange,
+                                                    shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            8,
+                                                          ),
+                                                    ),
+                                                    elevation: 0,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                          horizontal: 12,
+                                                        ),
+                                                  ),
+                                                  child: Row(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      Text(
+                                                        'Add to cart',
+                                                        style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(height: 3),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],

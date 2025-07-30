@@ -49,4 +49,10 @@ class AppColors {
 
   // Light Yellow color
   static const Color softYellow1 = Color(0xFFFFE3AD);
+  static List<Color> actions = [
+    Color(0xFFFFF7ED),
+    Color(0xFFF0FDF4),
+    Color(0xFFEFF6FF),
+    Color(0xFFFAF5FF),
+  ];
 }

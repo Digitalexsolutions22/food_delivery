@@ -111,11 +111,11 @@ class AddressList extends StatelessWidget {
                                 Icon(Icons.home_outlined),
                                 SizedBox(width: 5),
                                 MainBody(
-                                  title: "home",
+                                  title: "Home",
                                   applymaxlines: true,
                                   maxlines: 1,
                                   fontSize: 20,
-                                  fontWeight: FontWeight.bold,
+                                  // fontWeight: FontWeight.bold,
                                 ),
                                 Spacer(),
                                 Image.asset(AppImages.checkbox, height: 20),

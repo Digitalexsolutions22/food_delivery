@@ -30,7 +30,7 @@ class AppImages {
     "2 active",
     "Weekly",
     "View",
-    "6 am - 12 pm",
+    "6 am - 10 pm",
   ];
   //stars
   static const String fullistar = "assets/images/ratingstares/fullrating.png";
