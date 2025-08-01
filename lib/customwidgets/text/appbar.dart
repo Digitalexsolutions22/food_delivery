@@ -71,10 +71,34 @@ class CollapsibleHeader extends StatelessWidget {
   }
 }
 
-class Menuheader extends StatelessWidget {
+class Menuheader extends StatefulWidget {
   final String title;
 
   const Menuheader({super.key, required this.title});
+
+  @override
+  State<Menuheader> createState() => _MenuheaderState();
+}
+
+class _MenuheaderState extends State<Menuheader> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _hasText = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(() {
+      setState(() {
+        _hasText = _searchController.text.isNotEmpty;
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +124,7 @@ class Menuheader extends StatelessWidget {
             title:
                 isCollapsed
                     ? MainBody(
-                      title: title,
+                      title: widget.title,
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
                       fontcolor: AppColors.black,
@@ -110,7 +134,7 @@ class Menuheader extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 MainBody(
-                  title: title,
+                  title: widget.title,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                   fontcolor: AppColors.black,
@@ -125,52 +149,55 @@ class Menuheader extends StatelessWidget {
                   child: Stack(
                     alignment: Alignment.centerLeft,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 54.0, top: 3),
-                        child: Row(
-                          children: [
-                            Text(
-                              'Search for ',
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 18,
+                      // Only show animated text when there's no text in the field
+                      if (!_hasText)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 54.0, top: 3),
+                          child: Row(
+                            children: [
+                              Text(
+                                'Search for ',
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 18,
+                                ),
                               ),
-                            ),
-                            AnimatedTextKit(
-                              repeatForever: true,
-                              pause: const Duration(milliseconds: 400),
-                              animatedTexts: [
-                                FadeAnimatedText(
-                                  'Dishes',
-                                  textStyle: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
+                              AnimatedTextKit(
+                                repeatForever: true,
+                                pause: const Duration(milliseconds: 400),
+                                animatedTexts: [
+                                  FadeAnimatedText(
+                                    'Dishes',
+                                    textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                    ),
+                                    duration: Duration(milliseconds: 1200),
                                   ),
-                                  duration: Duration(milliseconds: 1200),
-                                ),
-                                FadeAnimatedText(
-                                  'Biryani',
-                                  textStyle: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
+                                  FadeAnimatedText(
+                                    'Biryani',
+                                    textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                    ),
+                                    duration: Duration(milliseconds: 1200),
                                   ),
-                                  duration: Duration(milliseconds: 1200),
-                                ),
-                                FadeAnimatedText(
-                                  'Paratha',
-                                  textStyle: const TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 18,
+                                  FadeAnimatedText(
+                                    'Paratha',
+                                    textStyle: const TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 18,
+                                    ),
+                                    duration: Duration(milliseconds: 1200),
                                   ),
-                                  duration: Duration(milliseconds: 1200),
-                                ),
-                              ],
-                              isRepeatingAnimation: true,
-                            ),
-                          ],
+                                ],
+                                isRepeatingAnimation: true,
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       TextField(
+                        controller: _searchController,
                         decoration: InputDecoration(
                           prefixIcon: Image.asset(
                             AppImages.searchiconthin,
@@ -182,6 +209,8 @@ class Menuheader extends StatelessWidget {
                             horizontal: 16,
                             vertical: 13,
                           ),
+                          // Add a hint text that appears when focused but no animated text
+                          hintText: _hasText ? null : '',
                         ),
                         style: TextStyle(fontSize: 18),
                       ),

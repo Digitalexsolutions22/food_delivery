@@ -4,7 +4,7 @@ import 'package:food_delivery/customwidgets/text/body.dart';
 
 BoxDecoration defaultBoxDecoration({Color borderColor = AppColors.lightGrey}) {
   return BoxDecoration(
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(15),
     border: Border.all(color: borderColor),
   );
 }

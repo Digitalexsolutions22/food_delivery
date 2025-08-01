@@ -102,13 +102,17 @@ class _HomescreenState extends State<Homescreen> {
                                     size: 14,
                                   ),
                                   SizedBox(width: 2),
-                                  Text(
-                                    provider.result,
-                                    // 'HSR Layout, Bangalore • 10km radius',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10,
-                                      color: Colors.white.withAlpha(204),
+                                  Expanded(
+                                    child: Text(
+                                      provider.result,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      // 'HSR Layout, Bangalore • 10km radius',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10,
+                                        color: Colors.white.withAlpha(204),
+                                      ),
                                     ),
                                   ),
                                 ],

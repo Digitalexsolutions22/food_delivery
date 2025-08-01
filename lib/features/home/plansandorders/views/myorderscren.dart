@@ -5,6 +5,8 @@ import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/continerdecoration.dart';
+import 'package:lottie/lottie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyorderScreen extends StatefulWidget {
   const MyorderScreen({super.key});
@@ -22,6 +24,15 @@ class _MyorderScreenState extends State<MyorderScreen> {
     setState(() {
       screentype = screnn;
     });
+  }
+
+  void _makePhoneCall(String phoneNumber) async {
+    final Uri url = Uri(scheme: 'tel', path: phoneNumber);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 
   @override
@@ -159,7 +170,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                       physics: NeverScrollableScrollPhysics(),
 
                       shrinkWrap: true,
-                      itemCount: 4,
+                      itemCount: 3,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 20),
@@ -193,24 +204,61 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                       ],
                                     ),
 
-                                    StatusTag(
-                                      title: 'Preparing',
-                                      backgroundColor: AppColors.softYellow,
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 2,
+                                        horizontal: 15,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: AppColors.softYellow,
+                                        border: Border.all(
+                                          color: AppColors.lightGrey,
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "Preparing",
+                                        style: TextStyle(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w500,
+                                          color: AppColors.black,
+                                        ),
+                                      ),
                                     ),
                                   ],
                                 ),
                                 SizedBox(height: 16),
-                                MainBody(
-                                  title: "Homestyle Dal Chawal",
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  fontcolor: AppColors.black,
-                                ),
-                                SizedBox(height: 4),
-                                MainBody(
-                                  title: "Quantity: 1 • ₹120",
-                                  fontSize: 14,
-                                  fontcolor: Colors.black54,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          MainBody(
+                                            title: "Homestyle Dal Chawal",
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            fontcolor: AppColors.black,
+                                          ),
+                                          SizedBox(height: 4),
+                                          MainBody(
+                                            title: "Quantity: 1 • ₹120",
+                                            fontSize: 14,
+                                            fontcolor: Colors.black54,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Lottie.asset(
+                                      AppImages.preparingblue,
+                                      height: 50,
+                                      width: 50,
+                                      repeat: true,
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(height: 20),
                                 Container(
@@ -220,7 +268,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                   ),
                                   decoration: BoxDecoration(
                                     border: Border.all(width: 0.1),
-                                    borderRadius: BorderRadius.circular(10),
+                                    borderRadius: BorderRadius.circular(5),
                                     color: Color(0xFFF7F7F7),
                                   ),
                                   child: Column(
@@ -265,19 +313,26 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                   ),
                                 ),
                                 SizedBox(height: 10),
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 8),
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    border: Border.all(color: AppColors.orange),
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: Center(
-                                    child: MainBody(
-                                      title: "Call Now",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                      fontcolor: AppColors.orange,
+                                GestureDetector(
+                                  onTap: () {
+                                    _makePhoneCall('9234567810');
+                                  },
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 8),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: AppColors.orange,
+                                      ),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: Center(
+                                      child: MainBody(
+                                        title: "Call Now",
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w500,
+                                        fontcolor: AppColors.orange,
+                                      ),
                                     ),
                                   ),
                                 ),

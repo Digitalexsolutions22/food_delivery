@@ -47,6 +47,9 @@ dependencies:
   lottie: ^3.3.1
   animated_text_kit: ^4.2.3
   smooth_page_indicator: ^1.2.1
+  url_launcher: ^6.3.2
+  firebase_messaging: ^16.0.0
+  firebase_core: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +78,7 @@ flutter:
     - assets/images/
     - assets/images/ratingstares/
     - assets/images/icons/
+    - assets/images/food/
     - assets/images/animations/
     
 
@@ -89,13 +93,17 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: assets/fonts/Roboto-Regular.ttf
-    - family: Poppins
-      fonts:
-        - asset: assets/fonts/Poppins-Regular.ttf
+fonts:
+  - family: Roboto
+    fonts:
+      - asset: assets/fonts/Roboto-Regular.ttf
+
+  - family: Poppins
+    fonts:
+      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Poppins-Medium.ttf
+        weight: 500
+
   # fonts:
   #   - family: Schyler
   #     fonts:

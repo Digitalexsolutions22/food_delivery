@@ -62,4 +62,15 @@ class AppImages {
   static const String subtract = "assets/images/Vector (31).png";
   static const String delete = "assets/images/weui_delete-outlined.png";
   static const String tag = "assets/images/Vector (32).png";
+  static const String emptycart = "assets/images/remove.png";
+  static const String deliveryboy = "assets/images/animations/Delivery.json";
+  static const String preparingred = "assets/images/animations/Preparered.json";
+  static const String preparingblue =
+      "assets/images/animations/Preparingblue.json";
+  static const List<String> menucategories = [
+    "assets/images/food/allfood.png",
+    "assets/images/food/Chicken-Biryani.jpg",
+    "assets/images/food/Masala-dosa-.jpg",
+    "assets/images/food/meals-.jpg",
+  ];
 }
