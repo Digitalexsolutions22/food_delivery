@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/enms.dart';
+import 'package:food_delivery/constants/fonts.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
@@ -9,7 +10,8 @@ import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MyorderScreen extends StatefulWidget {
-  const MyorderScreen({super.key});
+  final String? orderStatus;
+  const MyorderScreen({super.key, this.orderStatus});
 
   @override
   State<MyorderScreen> createState() => _MyorderScreenState();
@@ -170,7 +172,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                       physics: NeverScrollableScrollPhysics(),
 
                       shrinkWrap: true,
-                      itemCount: 3,
+                      itemCount: 1,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 20),
@@ -217,7 +219,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                         ),
                                       ),
                                       child: Text(
-                                        "Preparing",
+                                        widget.orderStatus ?? "Preparing",
                                         style: TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.w500,
@@ -254,8 +256,8 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                     ),
                                     Lottie.asset(
                                       AppImages.preparingblue,
-                                      height: 50,
-                                      width: 50,
+                                      height: 70,
+                                      width: 80,
                                       repeat: true,
                                     ),
                                   ],
@@ -327,11 +329,23 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                       borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: Center(
-                                      child: MainBody(
-                                        title: "Call Now",
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w500,
-                                        fontcolor: AppColors.orange,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.call,
+                                            size: 22,
+                                            color: AppColors.orange,
+                                          ),
+                                          SizedBox(width: 4),
+                                          MainBody(
+                                            title: "Call Now",
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w500,
+                                            fontcolor: AppColors.orange,
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),

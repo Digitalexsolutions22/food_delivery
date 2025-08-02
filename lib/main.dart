@@ -7,27 +7,25 @@ import 'package:food_delivery/constants/fonts.dart';
 import 'package:food_delivery/constants/routs.dart';
 import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:food_delivery/firebase_options.dart';
+import 'package:food_delivery/notification/notification_service.dart';
 import 'package:provider/provider.dart';
+
+Future<void> _backgroundMessaging(RemoteMessage message) async {
+  print("🔕 Background message: ${message.notification?.title}");
+}
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseMessaging.instance.requestPermission();
+  await initLocalNotifications();
+  setupFirebaseMessaging(); // includes foreground listener
+
+  FirebaseMessaging.onBackgroundMessage(_backgroundMessaging);
 
   String? token = await FirebaseMessaging.instance.getToken();
   print("🔥 FCM Token: $token");
-  FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-    print('📩 Foreground message received: ${message.notification?.title}');
-  });
-  Future<void> firebaseMessagingBackgroundHandler(
-    RemoteMessage message,
-  ) async {
-    await Firebase.initializeApp();
-    print("🔄 Background message: ${message.messageId}");
-  }
-
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -35,12 +33,8 @@ Future<void> main() async {
       systemNavigationBarIconBrightness: Brightness.light,
     ),
   );
-  // // If you want to use DevicePreview with ShowCaseWidget:
-  // runApp(
-  //   DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp()),
-  // );
-  runApp(const MyApp());
 
+  runApp(const MyApp());
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
@@ -68,13 +62,7 @@ class MyApp extends StatelessWidget {
                   child: MaterialApp.router(
                     debugShowCheckedModeBanner: false,
                     scaffoldMessengerKey: scaffoldMessengerKey,
-                    title: 'Flutter Demo',
-                    theme: ThemeData(
-                      fontFamily: AppFonts.poppins,
-                      colorScheme: ColorScheme.fromSeed(
-                        seedColor: AppColors.deepGreen,
-                      ),
-                    ),
+                    theme: ThemeData(fontFamily: AppFonts.poppins),
                     routerConfig: goRoute,
                   ),
                 ),

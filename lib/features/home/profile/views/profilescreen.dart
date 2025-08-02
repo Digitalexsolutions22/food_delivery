@@ -197,10 +197,10 @@ class ProfileScreen extends StatelessWidget {
       ),
       child: ListTile(
         onTap: onTap,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
         leading: Container(
-          width: 44,
-          height: 44,
+          width: 40,
+          height: 40,
           decoration: BoxDecoration(
             color: AppColors.orange,
             shape: BoxShape.circle,
@@ -210,7 +210,7 @@ class ProfileScreen extends StatelessWidget {
         title: Text(
           title,
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),

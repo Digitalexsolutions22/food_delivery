@@ -34,8 +34,12 @@ final GoRouter goRoute = GoRouter(
         GoRoute(
           path: '/orders',
           name: 'orders',
-          builder: (context, state) => MyorderScreen(),
+          builder: (context, state) {
+            final orderStatus = state.extra as String?;
+            return MyorderScreen(orderStatus: orderStatus ?? 'Preparing');
+          },
         ),
+
         GoRoute(
           path: '/profile',
           name: 'profile',

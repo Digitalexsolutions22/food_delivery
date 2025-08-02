@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
+import 'package:food_delivery/customwidgets/text/hometitle.dart';
 import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:food_delivery/main.dart';
 import 'package:go_router/go_router.dart';
@@ -69,7 +70,7 @@ class _HomescreenState extends State<Homescreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              SizedBox(height: 30),
+                              SizedBox(height: 36),
                               Row(
                                 children: [
                                   Text(
@@ -123,7 +124,7 @@ class _HomescreenState extends State<Homescreen> {
                           // Location button
                           Positioned(
                             right: 0,
-                            top: 30,
+                            top: 40,
                             child: Container(
                               width: 50,
                               height: 50,
@@ -399,37 +400,14 @@ class _HomescreenState extends State<Homescreen> {
                               ),
                             ),
                           ),
-                          SizedBox(height: 26),
-                          GestureDetector(
+                          SizedBox(height: 20),
+                          TitleWithViewAll(
+                            title: "Meal Packages",
                             onTap: () {
                               navigatorKey.currentContext?.go('/plans');
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MainBody(
-                                  title: "Meal Packages",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                Row(
-                                  children: [
-                                    MainBody(
-                                      title: "View All ",
-                                      fontSize: 14,
-                                      fontcolor: AppColors.orange,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: AppColors.orange,
-                                      size: 12,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
+
                           SizedBox(height: 12),
                           SizedBox(
                             height: 154,
@@ -498,7 +476,7 @@ class _HomescreenState extends State<Homescreen> {
                           ),
                           SizedBox(height: 24),
                           MainBody(
-                            title: "Quick Actions",
+                            title: "  Quick Actions",
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
@@ -567,36 +545,13 @@ class _HomescreenState extends State<Homescreen> {
                             ),
                           ),
                           SizedBox(height: 12),
-                          GestureDetector(
+                          TitleWithViewAll(
+                            title: "Today’s Specials",
                             onTap: () {
                               navigatorKey.currentContext?.go('/menu');
                             },
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                MainBody(
-                                  title: "Today’s Specials",
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                Row(
-                                  children: [
-                                    MainBody(
-                                      title: "View All ",
-                                      fontSize: 14,
-                                      fontcolor: AppColors.orange,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                    Icon(
-                                      Icons.arrow_forward_ios,
-                                      color: AppColors.orange,
-                                      size: 12,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
                           ),
+
                           SizedBox(
                             height: 210,
                             child: ListView.builder(
