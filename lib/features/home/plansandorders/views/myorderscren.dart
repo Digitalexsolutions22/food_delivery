@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/enms.dart';
-import 'package:food_delivery/constants/fonts.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
