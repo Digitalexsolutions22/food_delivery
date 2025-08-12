@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/features/home/profile/views/address_listcreen.dart';
-import 'package:food_delivery/features/home/profile/views/privacyscreen.dart';
+import 'package:food_delivery/features/profile/views/address_listcreen.dart';
+import 'package:food_delivery/features/profile/views/privacyscreen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});

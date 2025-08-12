@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
-import 'package:food_delivery/features/home/profile/views/add_address.dart';
-import 'package:food_delivery/features/home/profile/views/options.dart';
+import 'package:food_delivery/features/profile/views/add_address.dart';
+import 'package:food_delivery/features/profile/views/options.dart';
 
 class AddressList extends StatelessWidget {
   const AddressList({super.key});

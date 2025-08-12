@@ -4,6 +4,7 @@ import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/animations.dart/hearbeetanimation.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
+import 'package:food_delivery/features/plansandorders/views/plandetails.dart';
 
 class PlansScreen extends StatefulWidget {
   const PlansScreen({super.key});
@@ -252,23 +253,28 @@ class _PlansScreenState extends State<PlansScreen>
                                         },
                                       ),
                                       SizedBox(height: 10),
-                                      Container(
-                                        width: double.infinity,
-                                        padding: EdgeInsets.symmetric(
-                                          vertical: 10,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(
-                                            10,
+                                      GestureDetector(
+                                        onTap: () {
+                                          PlanDetailsBottomSheet.show(context);
+                                        },
+                                        child: Container(
+                                          width: double.infinity,
+                                          padding: EdgeInsets.symmetric(
+                                            vertical: 10,
                                           ),
-                                          color: AppColors.orange,
-                                        ),
-                                        child: Center(
-                                          child: MainBody(
-                                            title: "Subscribe",
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w500,
-                                            fontcolor: AppColors.white,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              10,
+                                            ),
+                                            color: AppColors.orange,
+                                          ),
+                                          child: Center(
+                                            child: MainBody(
+                                              title: "Subscribe",
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w500,
+                                              fontcolor: AppColors.white,
+                                            ),
                                           ),
                                         ),
                                       ),

@@ -6,8 +6,7 @@ class TitleWithViewAll extends StatelessWidget {
   final String title;
   final VoidCallback onTap;
 
-  const TitleWithViewAll({Key? key, required this.title, required this.onTap})
-    : super(key: key);
+  const TitleWithViewAll({super.key, required this.title, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
