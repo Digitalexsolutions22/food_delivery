@@ -6,6 +6,9 @@ class AppImages {
   static const String menuimage = "assets/images/Rectangle 37.png";
   static const String cardicon = "assets/images/Group.png";
   static const String codicon = "assets/images/man.png";
+  static const String loginimage =
+      "assets/images/ezgif.com-webp-to-jpg-converter.jpg";
+  static const String forgotpassword = "assets/images/forgot-password.png";
   // Animations
   static const String menuanimation =
       "assets/images/animations/Food Carousel.json";
