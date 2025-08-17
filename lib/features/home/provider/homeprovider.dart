@@ -7,6 +7,7 @@ import 'package:food_delivery/features/home/models/fooditemsmodel.dart';
 import 'package:food_delivery/features/home/models/location_model.dart';
 import 'package:food_delivery/features/home/models/categoriesmodel.dart';
 import 'package:food_delivery/features/home/models/mealplansmodel.dart';
+import 'package:food_delivery/features/home/models/seemealmodel.dart';
 import 'package:food_delivery/functions/networkhelper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
@@ -124,20 +125,34 @@ class Homeprovider extends ChangeNotifier {
     notifyListeners();
   }
 
+  List<Booking> activeBookings = [];
   List<Booking> bookingList = [];
 
   Future<void> getBookings() async {
     isloading = true;
 
-    // Add query parameter ?user_id=1
     final res = await GetApiHelper().getRequest("${Apis.bookings}?user_id=1");
 
     if (res['status'] == 'success' && res['data'] is List) {
       bookingList =
           (res['data'] as List).map((item) => Booking.fromJson(item)).toList();
+
+      // Filter bookings where endDate >= today
+      DateTime today = DateTime.now();
+      activeBookings =
+          bookingList.where((b) {
+            try {
+              DateTime end = DateTime.parse(b.endDate);
+              return end.isAfter(today) || end.isAtSameMomentAs(today);
+            } catch (e) {
+              return false;
+            }
+          }).toList();
+
       notifyListeners();
     } else {
       bookingList = [];
+      activeBookings = [];
     }
 
     isloading = false;
@@ -156,6 +171,26 @@ class Homeprovider extends ChangeNotifier {
       log(planslist.length.toString());
     } else {
       planslist = [];
+    }
+
+    isloading = false;
+    notifyListeners();
+  }
+
+  // show meal list
+  PlanWithItems? planWithItems;
+
+  Future<void> getPlanMeal(String planId) async {
+    isloading = true;
+    final res = await GetApiHelper().getRequest(
+      "${Apis.listItems}?plan_id=$planId",
+    );
+
+    if (res['status'] == 'success' && res['plan'] != null) {
+      planWithItems = PlanWithItems.fromJson(res);
+      log(planWithItems!.items.length.toString()); // Example: 3 items
+    } else {
+      planWithItems = null;
     }
 
     isloading = false;

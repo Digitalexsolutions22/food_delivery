@@ -460,7 +460,7 @@ class _HomescreenState extends State<Homescreen> {
                                   Center(
                                     child: SmoothPageIndicator(
                                       controller: _controller,
-                                      count: 5,
+                                      count: provider.foodItemsList.length,
                                       effect: WormEffect(
                                         dotColor: AppColors.yellow,
                                         activeDotColor: Colors.red,
@@ -501,32 +501,29 @@ class _HomescreenState extends State<Homescreen> {
                                             ),
                                             child: Column(
                                               children: [
-                                                SizedBox(height: 18),
+                                                SizedBox(height: 22),
                                                 SizedBox(
-                                                  width: 120,
+                                                  width: 100,
                                                   height: 40,
                                                   child: MainBody(
                                                     applymaxlines: true,
-                                                    maxlines: 2,
+                                                    maxlines: 1,
                                                     title: data.planName,
-                                                    fontSize: 14,
+                                                    fontSize: 15,
                                                     textAlign: TextAlign.center,
-                                                    fontWeight: FontWeight.w500,
+                                                    fontWeight: FontWeight.bold,
                                                   ),
                                                 ),
-                                                SizedBox(height: 8),
+                                                SizedBox(height: 2),
                                                 MainBody(
-                                                  title: data.offerPrice,
-                                                  fontSize: 18,
+                                                  title:
+                                                      Appstring.ruppee +
+                                                      data.offerPrice,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w500,
                                                 ),
-                                                // SizedBox(height: 8),
-                                                // MainBody(
-                                                //   title: "1 meal/day",
-                                                //   fontSize: 10,
-                                                //   fontcolor: AppColors.gray,
-                                                //   fontWeight: FontWeight.bold,
-                                                // ),
-                                                SizedBox(height: 14),
+
+                                                SizedBox(height: 20),
                                                 Container(
                                                   width: 103,
                                                   height: 26,

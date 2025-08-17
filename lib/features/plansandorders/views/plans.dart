@@ -66,196 +66,243 @@ class _PlansScreenState extends State<PlansScreen>
                             children: [
                               SizedBox(height: 10),
                               // active plan
-                              SizedBox(
-                                height: 188,
-                                child: PageView.builder(
-                                  itemCount: provider.bookingList.length,
-                                  itemBuilder: (context, index) {
-                                    var data = provider.bookingList[index];
-                                    return Container(
-                                      margin: const EdgeInsets.symmetric(
-                                        horizontal: 4,
-                                      ), // Add margin between cards
-                                      padding: const EdgeInsets.all(
-                                        16,
-                                      ), // Increased padding
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: AppColors.lightGrey,
+                              provider.activeBookings.isEmpty
+                                  ? Container(
+                                    margin: const EdgeInsets.symmetric(
+                                      horizontal: 4,
+                                    ),
+                                    padding: const EdgeInsets.all(16),
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color: AppColors.lightGrey,
+                                      ),
+                                      color: Colors.white,
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black.withOpacity(0.1),
+                                          blurRadius: 4,
+                                          offset: const Offset(0, 2),
                                         ),
-                                        color:
-                                            Colors
-                                                .white, // Add background color
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(
-                                              0.05,
+                                      ],
+                                    ),
+                                    child: Text(
+                                      'No Active Plan',
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.grey[600],
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  )
+                                  : SizedBox(
+                                    height: 166,
+                                    child: PageView.builder(
+                                      itemCount: provider.activeBookings.length,
+                                      itemBuilder: (context, index) {
+                                        var data =
+                                            provider.activeBookings[index];
+                                        return Container(
+                                          margin: const EdgeInsets.symmetric(
+                                            horizontal: 4,
+                                          ), // Add margin between cards
+                                          padding: const EdgeInsets.all(
+                                            16,
+                                          ), // Increased padding
+                                          width: double.infinity,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
                                             ),
-                                            blurRadius: 4,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          // Header Row
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Expanded(
-                                                child: MainBody(
-                                                  title: "Current Plans",
-                                                  fontSize: 16,
-                                                  fontcolor:
-                                                      AppColors.deepGreen,
-                                                  fontWeight: FontWeight.w600,
+                                            border: Border.all(
+                                              color: AppColors.lightGrey,
+                                            ),
+                                            color:
+                                                Colors
+                                                    .white, // Add background color
+                                            boxShadow: [
+                                              BoxShadow(
+                                                color: Colors.black.withOpacity(
+                                                  0.05,
                                                 ),
+                                                blurRadius: 4,
+                                                offset: const Offset(0, 2),
                                               ),
-                                              HeartbeatButton(),
                                             ],
                                           ),
-                                          const SizedBox(height: 16),
-
-                                          // Plan Details Row
-                                          Row(
+                                          child: Column(
                                             children: [
-                                              // Plan Name Column
-                                              Expanded(
-                                                flex: 3,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    MainBody(
-                                                      title: data.planName,
-                                                      fontSize: 15,
-                                                      maxlines: 2,
-                                                      applymaxlines: true,
-                                                      textAlign: TextAlign.left,
+                                              // Header Row
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Expanded(
+                                                    child: MainBody(
+                                                      title: "Current Plans",
+                                                      fontSize: 16,
+                                                      fontcolor:
+                                                          AppColors.deepGreen,
                                                       fontWeight:
-                                                          FontWeight.bold,
-                                                      fontcolor: Colors.black87,
+                                                          FontWeight.w600,
                                                     ),
-                                                    const SizedBox(height: 4),
-                                                    MainBody(
-                                                      title: "Plan Type",
-                                                      fontSize: 12,
+                                                  ),
+                                                  HeartbeatButton(),
+                                                ],
+                                              ),
+                                              const SizedBox(height: 16),
+
+                                              // Plan Details Row
+                                              Row(
+                                                children: [
+                                                  // Plan Name Column
+                                                  Expanded(
+                                                    flex: 4,
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        MainBody(
+                                                          title: data.planName,
+                                                          fontSize: 15,
+                                                          maxlines: 2,
+                                                          applymaxlines: true,
+                                                          textAlign:
+                                                              TextAlign.left,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontcolor:
+                                                              Colors.black87,
+                                                        ),
+                                                        const SizedBox(
+                                                          height: 4,
+                                                        ),
+                                                        MainBody(
+                                                          title: "Plan Type",
+                                                          fontSize: 12,
+                                                          fontWeight:
+                                                              FontWeight.w500,
+                                                          fontcolor:
+                                                              AppColors.gray,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                  const SizedBox(width: 16),
+
+                                                  // Days Left Column
+                                                  Expanded(
+                                                    flex: 2,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        MainBody(
+                                                          title:
+                                                              daysLeftMessage(
+                                                                data.endDate
+                                                                    .toString(),
+                                                              ),
+                                                          textAlign:
+                                                              TextAlign.center,
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontcolor:
+                                                              Colors.black87,
+                                                        ),
+                                                        // const SizedBox(height: 4),
+                                                        // MainBody(
+                                                        //   title: "Days Left",
+                                                        //   fontSize: 12,
+                                                        //   fontWeight:
+                                                        //       FontWeight.w500,
+                                                        //   fontcolor: AppColors.gray,
+                                                        // ),
+                                                      ],
+                                                    ),
+                                                  ),
+
+                                                  // Meals Left Column
+                                                  // Expanded(
+                                                  //   flex: 2,
+                                                  //   child: Column(
+                                                  //     crossAxisAlignment:
+                                                  //         CrossAxisAlignment.center,
+                                                  //     children: [
+                                                  //       MainBody(
+                                                  //         title: "10",
+                                                  //         fontSize: 15,
+                                                  //         fontWeight:
+                                                  //             FontWeight.bold,
+                                                  //         fontcolor: Colors.black87,
+                                                  //       ),
+                                                  //       const SizedBox(height: 4),
+                                                  //       MainBody(
+                                                  //         title: "Meals Left",
+                                                  //         fontSize: 12,
+                                                  //         fontWeight:
+                                                  //             FontWeight.w500,
+                                                  //         fontcolor: AppColors.gray,
+                                                  //       ),
+                                                  //     ],
+                                                  //   ),
+                                                  // ),
+                                                ],
+                                              ),
+
+                                              const SizedBox(height: 16),
+
+                                              // Divider
+                                              Divider(
+                                                thickness: 1,
+                                                color: AppColors.lightGrey,
+                                                height: 1,
+                                              ),
+
+                                              const SizedBox(height: 12),
+
+                                              // Delivery Info Row
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    AppImages.clock,
+                                                    scale: 4,
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  Expanded(
+                                                    child: MainBody(
+                                                      title:
+                                                          "Next delivery: Tomorrow, 12:30 PM",
+                                                      fontSize: 13,
                                                       fontWeight:
                                                           FontWeight.w500,
                                                       fontcolor: AppColors.gray,
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-
-                                              const SizedBox(width: 16),
-
-                                              // Days Left Column
-                                              Expanded(
-                                                flex: 2,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    MainBody(
-                                                      title: daysLeftMessage(
-                                                        data.endDate.toString(),
-                                                      ),
-                                                      textAlign:
-                                                          TextAlign.center,
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontcolor: Colors.black87,
-                                                    ),
-                                                    const SizedBox(height: 4),
-                                                    MainBody(
-                                                      title: "Days Left",
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontcolor: AppColors.gray,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-
-                                              const SizedBox(width: 16),
-
-                                              // Meals Left Column
-                                              Expanded(
-                                                flex: 2,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: [
-                                                    MainBody(
-                                                      title: "10",
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      fontcolor: Colors.black87,
-                                                    ),
-                                                    const SizedBox(height: 4),
-                                                    MainBody(
-                                                      title: "Meals Left",
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w500,
-                                                      fontcolor: AppColors.gray,
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
                                               ),
                                             ],
                                           ),
-
-                                          const SizedBox(height: 16),
-
-                                          // Divider
-                                          Divider(
-                                            thickness: 1,
-                                            color: AppColors.lightGrey,
-                                            height: 1,
-                                          ),
-
-                                          const SizedBox(height: 12),
-
-                                          // Delivery Info Row
-                                          Row(
-                                            children: [
-                                              Image.asset(
-                                                AppImages.clock,
-                                                scale: 4,
-                                              ),
-                                              const SizedBox(width: 10),
-                                              Expanded(
-                                                child: MainBody(
-                                                  title:
-                                                      "Next delivery: Tomorrow, 12:30 PM",
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontcolor: AppColors.gray,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                              SizedBox(height: 20),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                              SizedBox(height: 30),
                               MainBody(
                                 title: "Choose Your Plan",
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
                               ),
-                              SizedBox(height: 20),
                               ListView.builder(
                                 padding: EdgeInsets.zero,
                                 physics: NeverScrollableScrollPhysics(),
@@ -286,23 +333,40 @@ class _PlansScreenState extends State<PlansScreen>
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
+                                                  SizedBox(height: 4),
                                                   Row(
                                                     mainAxisAlignment:
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      MainBody(
-                                                        title:
-                                                            provider
-                                                                .planslist[index]
-                                                                .planName,
-                                                        fontSize: 15,
-                                                        fontWeight:
-                                                            FontWeight.w500,
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          MainBody(
+                                                            title:
+                                                                provider
+                                                                    .planslist[index]
+                                                                    .planName,
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                          ),
+                                                          SizedBox(height: 2),
+                                                          MainBody(
+                                                            title:
+                                                                "Order as you go",
+                                                            fontSize: 12,
+                                                            fontWeight:
+                                                                FontWeight.w500,
+                                                            fontcolor:
+                                                                Colors.grey,
+                                                          ),
+                                                        ],
                                                       ),
                                                       Column(
                                                         children: [
-                                                          SizedBox(height: 10),
                                                           MainBody(
                                                             title:
                                                                 provider
@@ -318,7 +382,7 @@ class _PlansScreenState extends State<PlansScreen>
 
                                                           MainBody(
                                                             title: "plan price",
-                                                            fontSize: 9,
+                                                            fontSize: 10,
                                                             fontWeight:
                                                                 FontWeight.w500,
                                                           ),
@@ -326,13 +390,8 @@ class _PlansScreenState extends State<PlansScreen>
                                                       ),
                                                     ],
                                                   ),
-                                                  MainBody(
-                                                    title: "Order as you go",
-                                                    fontSize: 12,
-                                                    fontWeight: FontWeight.w500,
-                                                    fontcolor: AppColors.gray,
-                                                  ),
-                                                  SizedBox(height: 10),
+
+                                                  SizedBox(height: 16),
                                                   Padding(
                                                     padding:
                                                         const EdgeInsets.only(
@@ -374,6 +433,26 @@ class _PlansScreenState extends State<PlansScreen>
                                                     onTap: () {
                                                       PlanDetailsBottomSheet.show(
                                                         context,
+                                                        planDuration:
+                                                            provider
+                                                                .planslist[index]
+                                                                .durationType,
+                                                        planType:
+                                                            provider
+                                                                .planslist[index]
+                                                                .planName,
+                                                        mealTypes:
+                                                            provider
+                                                                .planslist[index]
+                                                                .description,
+                                                        currentPrice:
+                                                            provider
+                                                                .planslist[index]
+                                                                .offerPrice,
+                                                        originalPrice:
+                                                            provider
+                                                                .planslist[index]
+                                                                .price,
                                                       );
                                                     },
                                                     child: Container(
@@ -480,81 +559,149 @@ class _PlansScreenState extends State<PlansScreen>
                               SizedBox(height: 10),
                               Row(
                                 children: [
-                                  Container(
-                                    padding: EdgeInsets.all(14),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(width: 0.2),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.yellowTransparent,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Icon(
-                                            Icons.restaurant_menu,
-                                            color: AppColors.orange,
-                                            size: 20,
-                                          ),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          width: 1,
                                         ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Fresh Daily',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(
+                                              0.1,
+                                            ),
+                                            blurRadius: 8,
+                                            offset: Offset(0, 2),
                                           ),
-                                        ),
-                                        Text(
-                                          'Prepared fresh every day',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  AppColors.yellowTransparent,
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: AppColors.orange
+                                                      .withOpacity(0.1),
+                                                  blurRadius: 4,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Icon(
+                                              Icons.restaurant_menu,
+                                              color: AppColors.orange,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          SizedBox(height: 12),
+                                          Text(
+                                            'Fresh Daily',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black87,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            'Prepared fresh every day',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              color: Colors.grey[600],
+                                              height: 1.3,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                  Spacer(),
-                                  Container(
-                                    padding: EdgeInsets.all(14),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(15),
-                                      border: Border.all(width: 0.2),
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Container(
-                                          padding: EdgeInsets.all(10),
-                                          decoration: BoxDecoration(
-                                            color: AppColors.yellowTransparent,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Icon(
-                                            Icons.calendar_today_outlined,
-                                            color: AppColors.orange,
-                                            size: 20,
-                                          ),
+                                  SizedBox(width: 16),
+                                  Expanded(
+                                    child: Container(
+                                      padding: EdgeInsets.all(16),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius: BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.grey.withOpacity(0.1),
+                                          width: 1,
                                         ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Flexible',
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(
+                                              0.1,
+                                            ),
+                                            blurRadius: 8,
+                                            offset: Offset(0, 2),
                                           ),
-                                        ),
-                                        Text(
-                                          'Skip or pause anytime',
-                                          style: TextStyle(fontSize: 12),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Container(
+                                            padding: EdgeInsets.all(12),
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  AppColors.yellowTransparent,
+                                              shape: BoxShape.circle,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: AppColors.orange
+                                                      .withOpacity(0.1),
+                                                  blurRadius: 4,
+                                                  offset: Offset(0, 2),
+                                                ),
+                                              ],
+                                            ),
+                                            child: Icon(
+                                              Icons.calendar_today_outlined,
+                                              color: AppColors.orange,
+                                              size: 24,
+                                            ),
+                                          ),
+                                          SizedBox(height: 12),
+                                          Text(
+                                            'Flexible',
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black87,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          SizedBox(height: 4),
+                                          Text(
+                                            'Skip or pause anytime',
+                                            style: TextStyle(
+                                              fontSize: 11,
+                                              color: Colors.grey[600],
+                                              height: 1.3,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ],

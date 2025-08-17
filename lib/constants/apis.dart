@@ -4,4 +4,5 @@ class Apis {
   static const String foodCategories = "get_categories.php";
   static const String planItems = "getmeal.php";
   static const String bookings = "getusermeal.php";
+  static const String listItems = "mealplandetails.php";
 }
