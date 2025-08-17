@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
+import 'package:food_delivery/constants/strings.dart';
+import 'package:food_delivery/customwidgets/loading_screens.dart/loading_menu.dart';
 import 'package:food_delivery/customwidgets/menucategories.dart';
 import 'package:food_delivery/customwidgets/text/appbar.dart';
+import 'package:food_delivery/features/home/models/fooditemsmodel.dart';
+import 'package:food_delivery/features/home/provider/homeprovider.dart';
 
 import 'package:food_delivery/features/home/views/menuitem.dart';
+import 'package:provider/provider.dart';
 
 class MenuScreen extends StatefulWidget {
   const MenuScreen({super.key});
@@ -14,146 +19,189 @@ class MenuScreen extends StatefulWidget {
 }
 
 class MenuScreenState extends State<MenuScreen> {
-  String currentCategory = 'All';
-  int selectedCategoryIndex = 0;
-  bool isVeg = false;
+  @override
+  void initState() {
+    super.initState();
+    final provider = Provider.of<Homeprovider>(context, listen: false);
+    provider.getSearchItems();
+    provider.getCategories();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(18.0),
-          child: CustomScrollView(
-            slivers: [
-              // Title
-              Menuheader(title: "Our Menu"),
-              SliverToBoxAdapter(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Veg/Non-Veg Toggle
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => setState(() => isVeg = true),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  isVeg ? Colors.green[50] : Colors.transparent,
-                              border: Border.all(color: Colors.grey[300]!),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
+    return Consumer<Homeprovider>(
+      builder: (context, provider, _) {
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body:
+              provider.isloading
+                  ? LoadingMenu()
+                  : SafeArea(
+                    child: Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: CustomScrollView(
+                        slivers: [
+                          // Title
+                          Menuheader(title: "Our Menu"),
+                          SliverToBoxAdapter(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Image.asset(AppImages.vegicon, height: 15),
-                                SizedBox(width: 8),
-                                Text(
-                                  'Veg',
-                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                // Veg/Non-Veg Toggle
+                                Row(
+                                  children: [
+                                    // All button
+                                    GestureDetector(
+                                      onTap: () {
+                                        provider.setFilter(FoodFilter.all);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 6,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              provider.currentFilter ==
+                                                      FoodFilter.all
+                                                  ? Colors.blue[50]
+                                                  : Colors.transparent,
+                                          border: Border.all(
+                                            color: Colors.grey[300]!,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Text(
+                                          'All',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+
+                                    // Veg button
+                                    GestureDetector(
+                                      onTap: () {
+                                        provider.setFilter(FoodFilter.veg);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 6,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              provider.currentFilter ==
+                                                      FoodFilter.veg
+                                                  ? Colors.green[50]
+                                                  : Colors.transparent,
+                                          border: Border.all(
+                                            color: Colors.grey[300]!,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Image.asset(
+                                              AppImages.vegicon,
+                                              height: 15,
+                                            ),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              'Veg',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(width: 8),
+
+                                    // Non-Veg button
+                                    GestureDetector(
+                                      onTap: () {
+                                        provider.setFilter(FoodFilter.nonVeg);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 16,
+                                          vertical: 6,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color:
+                                              provider.currentFilter ==
+                                                      FoodFilter.nonVeg
+                                                  ? Colors.red[50]
+                                                  : Colors.transparent,
+                                          border: Border.all(
+                                            color: Colors.grey[300]!,
+                                          ),
+                                          borderRadius: BorderRadius.circular(
+                                            8,
+                                          ),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Image.asset(
+                                              AppImages.nonvegicon,
+                                              height: 15,
+                                            ),
+                                            SizedBox(width: 8),
+                                            Text(
+                                              'Non-Veg',
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+
+                                CategoryFilter(
+                                  onCategorySelected: (category) {
+                                    provider.setCategory(category);
+                                  },
+                                  categories: provider.foodCatList,
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                        SizedBox(width: 8),
-                        GestureDetector(
-                          onTap: () => setState(() => isVeg = false),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 6,
-                            ),
-                            decoration: BoxDecoration(
-                              color:
-                                  !isVeg ? Colors.red[50] : Colors.transparent,
-                              border: Border.all(color: Colors.grey[300]!),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Image.asset(AppImages.nonvegicon, height: 15),
-                                SizedBox(width: 8),
-                                Text(
-                                  'Non-Veg',
-                                  style: TextStyle(fontWeight: FontWeight.w500),
-                                ),
-                              ],
+
+                          // Menu Items List
+                          SliverList(
+                            delegate: SliverChildBuilderDelegate(
+                              (context, index) => _buildMenuItem(
+                                provider.searchItemsList[index].foodName,
+                                provider.searchItemsList[index].foodDescription,
+                                provider.searchItemsList[index].offerPrice,
+                              ),
+                              childCount: provider.searchItemsList.length,
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                    SizedBox(height: 8),
-                    CategoryFilter(
-                      onCategorySelected: (category) {
-                        setState(() {
-                          currentCategory = category;
-                        });
-                        print('Selected category: $category');
-                      },
-                    ),
-                    // Divider(),
-                  ],
-                ),
-              ),
-
-              // Menu Items List
-              SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (context, index) => _buildMenuItem(),
-                  childCount: 10, // you can change count
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+                  ),
+        );
+      },
     );
   }
 
-  Widget _buildCategoryTab(String title, IconData icon, int index) {
-    bool isSelected = selectedCategoryIndex == index;
-    return GestureDetector(
-      onTap: () => setState(() => selectedCategoryIndex = index),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 14, vertical: 6),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.orange : Colors.transparent,
-          border: Border.all(
-            color: isSelected ? AppColors.orange : Colors.grey[300]!,
-          ),
-          borderRadius: BorderRadius.circular(8),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              icon,
-              size: 20,
-              color: isSelected ? Colors.white : Colors.grey[600],
-            ),
-            SizedBox(width: 8),
-            Text(
-              title,
-              style: TextStyle(
-                color: isSelected ? Colors.white : Colors.black,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildMenuItem() {
+  Widget _buildMenuItem(String name, String details, String price) {
     return GestureDetector(
       onTap: () {
         menuitem(context);
@@ -203,7 +251,7 @@ class MenuScreenState extends State<MenuScreen> {
                       children: [
                         Expanded(
                           child: Text(
-                            'Aloo Paratha with Curd',
+                            name,
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
@@ -212,7 +260,7 @@ class MenuScreenState extends State<MenuScreen> {
                           ),
                         ),
                         Text(
-                          '  ₹85',
+                          Appstring.ruppee + price,
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
@@ -223,7 +271,7 @@ class MenuScreenState extends State<MenuScreen> {
                     ),
                     SizedBox(height: 4),
                     Text(
-                      'Stuffed potato flatbread with fresh yogurt & pickle',
+                      details,
                       style: TextStyle(fontSize: 11, color: Colors.grey[600]),
                     ),
                     SizedBox(height: 8),

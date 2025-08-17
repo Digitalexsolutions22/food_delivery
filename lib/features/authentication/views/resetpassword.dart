@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
+  const ResetPasswordScreen({super.key});
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }

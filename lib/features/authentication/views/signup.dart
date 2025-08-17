@@ -3,6 +3,8 @@ import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
@@ -139,7 +141,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 18),
 
                 // Sign Up Button
-                Container(
+                SizedBox(
                   height: 48,
                   child: ElevatedButton(
                     onPressed:
@@ -223,7 +225,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     bool obscureText = false,
     Widget? suffixIcon,
   }) {
-    return Container(
+    return SizedBox(
       height: 50,
       child: TextFormField(
         keyboardType: keyboardType,

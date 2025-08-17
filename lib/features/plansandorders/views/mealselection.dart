@@ -4,6 +4,8 @@ import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 
 class MealSelectionScreen extends StatefulWidget {
+  const MealSelectionScreen({super.key});
+
   @override
   _MealSelectionScreenState createState() => _MealSelectionScreenState();
 }
@@ -255,13 +257,13 @@ class MealCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const MealCard({
-    Key? key,
+    super.key,
     required this.title,
     required this.subtitle,
     required this.imageAsset,
     required this.isSelected,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

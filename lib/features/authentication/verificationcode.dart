@@ -1,10 +1,11 @@
 // Screen 2: Verification Code
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/features/authentication/views/forgotpassword.dart';
 import 'package:food_delivery/features/authentication/views/resetpassword.dart';
 
 class VerificationScreen extends StatefulWidget {
+  const VerificationScreen({super.key});
+
   @override
   _VerificationScreenState createState() => _VerificationScreenState();
 }

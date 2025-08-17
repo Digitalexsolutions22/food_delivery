@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/images.dart';
+import 'package:food_delivery/features/home/models/categoriesmodel.dart';
 
 class CategoryFilter extends StatefulWidget {
   final Function(String) onCategorySelected;
+  final List<Category> categories;
 
-  const CategoryFilter({super.key, required this.onCategorySelected});
+  const CategoryFilter({
+    super.key,
+    required this.onCategorySelected,
+    required this.categories,
+  });
 
   @override
   State<CategoryFilter> createState() => _CategoryFilterState();
@@ -13,31 +19,35 @@ class CategoryFilter extends StatefulWidget {
 class _CategoryFilterState extends State<CategoryFilter> {
   String selectedCategory = 'All';
 
-  final List<Map<String, String>> categories = [
-    {'name': 'All', 'image': 'assets/images/all.png'},
-    {'name': 'Biryani', 'image': 'assets/images/biryani.png'},
-    {'name': 'Tiffins', 'image': 'assets/images/tiffins.png'},
-    {'name': 'Meals', 'image': 'assets/images/meals.png'},
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final allCategories = [
+      Category(
+        categoryId: '0',
+        categoryName: 'All',
+        categoryDescription: '',
+        imageUrl: AppImages.menucategories[0], // local asset for "All"
+        createdAt: '',
+      ),
+      ...widget.categories,
+    ];
+
     return Container(
       height: 123,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
+        itemCount: allCategories.length,
         itemBuilder: (context, index) {
-          final category = categories[index];
-          final isSelected = selectedCategory == category['name'];
+          final category = allCategories[index];
+          final isSelected = selectedCategory == category.categoryName;
 
           return GestureDetector(
             onTap: () {
               setState(() {
-                selectedCategory = category['name']!;
+                selectedCategory = category.categoryName;
               });
-              widget.onCategorySelected(category['name']!);
+              widget.onCategorySelected(category.categoryName);
             },
             child: Container(
               margin: const EdgeInsets.symmetric(horizontal: 8),
@@ -57,22 +67,7 @@ class _CategoryFilterState extends State<CategoryFilter> {
                             width: 3,
                           ),
                         ),
-                        child: ClipOval(
-                          child: Image.asset(
-                            AppImages.menucategories[index],
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: Colors.grey[200],
-                                child: Icon(
-                                  _getCategoryIcon(category['name']!),
-                                  color: Colors.grey[600],
-                                  size: 30,
-                                ),
-                              );
-                            },
-                          ),
-                        ),
+                        child: ClipOval(child: _buildCategoryImage(category)),
                       ),
                       if (isSelected)
                         Positioned(
@@ -97,7 +92,7 @@ class _CategoryFilterState extends State<CategoryFilter> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    category['name']!,
+                    category.categoryName,
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight:
@@ -111,6 +106,29 @@ class _CategoryFilterState extends State<CategoryFilter> {
           );
         },
       ),
+    );
+  }
+
+  Widget _buildCategoryImage(Category category) {
+    // If it's the "All" category, use local asset
+    if (category.categoryId == '0') {
+      return Image.asset(category.imageUrl, fit: BoxFit.cover);
+    }
+
+    // Otherwise load from API (handle missing images)
+    return Image.network(
+      category.imageUrl,
+      fit: BoxFit.cover,
+      errorBuilder: (context, error, stackTrace) {
+        return Container(
+          color: Colors.grey[200],
+          child: Icon(
+            _getCategoryIcon(category.categoryName),
+            color: Colors.grey[600],
+            size: 30,
+          ),
+        );
+      },
     );
   }
 

@@ -7,25 +7,27 @@ class LoadingMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Lottie.asset(
-          AppImages.cartanimation,
-          width: 170,
-          height: 170,
-          fit: BoxFit.contain,
-        ),
-        const SizedBox(height: 10),
-        const Text(
-          "Just a moment...",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            color: Colors.black54,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            AppImages.cartanimation,
+            width: 170,
+            height: 170,
+            fit: BoxFit.contain,
           ),
-        ),
-      ],
+          const SizedBox(height: 10),
+          const Text(
+            "Just a moment...",
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black54,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

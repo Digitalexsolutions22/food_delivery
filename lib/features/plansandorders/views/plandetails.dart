@@ -14,7 +14,7 @@ class PlanDetailsBottomSheet extends StatelessWidget {
   final VoidCallback? onSelectMeals;
 
   const PlanDetailsBottomSheet({
-    Key? key,
+    super.key,
     this.planDuration = '2 Weeks',
     this.planDays = '10',
     this.planType = 'Weight loss',
@@ -24,7 +24,7 @@ class PlanDetailsBottomSheet extends StatelessWidget {
     this.originalPrice = ' 1059',
     this.availableDays = const ['Sun', 'Mon', 'Tue', 'Wed', 'Thu'],
     this.onSelectMeals,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +275,7 @@ class PlanDetailsBottomSheet extends StatelessWidget {
                       SizedBox(height: 24),
 
                       // Select meals button
-                      Container(
+                      SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () {

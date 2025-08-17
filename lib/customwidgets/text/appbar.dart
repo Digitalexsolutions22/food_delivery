@@ -5,6 +5,8 @@ import 'dart:developer';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
+import 'package:food_delivery/features/home/provider/homeprovider.dart';
+import 'package:provider/provider.dart';
 
 class CollapsibleHeader extends StatelessWidget {
   final String title;
@@ -91,6 +93,10 @@ class _MenuheaderState extends State<Menuheader> {
       setState(() {
         _hasText = _searchController.text.isNotEmpty;
       });
+
+      // Call provider method to filter data
+      final homeProvider = Provider.of<Homeprovider>(context, listen: false);
+      homeProvider.filterSearchResults(_searchController.text);
     });
   }
 

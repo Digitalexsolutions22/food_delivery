@@ -3,6 +3,8 @@ import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -217,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 20),
 
                     // Login button
-                    Container(
+                    SizedBox(
                       width: double.infinity,
                       height: 48,
                       child: ElevatedButton(

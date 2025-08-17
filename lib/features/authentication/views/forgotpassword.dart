@@ -5,6 +5,8 @@ import 'package:food_delivery/features/authentication/verificationcode.dart';
 
 // Screen 1: Forgot Password
 class ForgotPasswordScreen extends StatefulWidget {
+  const ForgotPasswordScreen({super.key});
+
   @override
   _ForgotPasswordScreenState createState() => _ForgotPasswordScreenState();
 }
@@ -44,7 +46,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Visibility(
                   visible: MediaQuery.of(context).viewInsets.bottom == 0,
                   child: Center(
-                    child: Container(
+                    child: SizedBox(
                       width: 200,
                       height: 200,
                       child: Image.asset(AppImages.forgotpassword),
