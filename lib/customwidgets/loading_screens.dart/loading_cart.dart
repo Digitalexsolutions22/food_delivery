@@ -7,21 +7,23 @@ class LoadingCart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Lottie.asset(
-          AppImages.foodpreparedanimation,
-          width: 170,
-          height: 170,
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Lottie.asset(
+            AppImages.foodpreparedanimation,
+            width: 170,
+            height: 170,
 
-          fit: BoxFit.contain, // or BoxFit.fill, BoxFit.cover
-        ),
-        const Text(
-          "Loading your delicious selections.",
-          style: TextStyle(fontSize: 16, color: Colors.black54),
-        ),
-      ],
+            fit: BoxFit.contain, // or BoxFit.fill, BoxFit.cover
+          ),
+          const Text(
+            "Loading your delicious selections.",
+            style: TextStyle(fontSize: 16, color: Colors.black54),
+          ),
+        ],
+      ),
     );
   }
 }

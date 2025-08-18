@@ -188,6 +188,8 @@ class MenuScreenState extends State<MenuScreen> {
                                 provider.searchItemsList[index].foodName,
                                 provider.searchItemsList[index].foodDescription,
                                 provider.searchItemsList[index].offerPrice,
+                                provider.searchItemsList[index].foodId
+                                    .toString(),
                               ),
                               childCount: provider.searchItemsList.length,
                             ),
@@ -201,7 +203,13 @@ class MenuScreenState extends State<MenuScreen> {
     );
   }
 
-  Widget _buildMenuItem(String name, String details, String price) {
+  Widget _buildMenuItem(
+    String name,
+    String details,
+    String price,
+    String foodid,
+  ) {
+    final provider = Provider.of<Homeprovider>(context, listen: false);
     return GestureDetector(
       onTap: () {
         menuitem(context);
@@ -288,9 +296,24 @@ class MenuScreenState extends State<MenuScreen> {
                     ),
                     SizedBox(height: 8),
                     ElevatedButton.icon(
-                      onPressed: () {},
-                      icon: Icon(Icons.add, size: 18),
-                      label: Text('Add to Cart'),
+                      onPressed: () {
+                        provider.addToCart(context, foodid, "1");
+                      },
+                      icon:
+                          provider.isadding
+                              ? SizedBox(
+                                height: 16,
+                                width: 16,
+                                child: CircularProgressIndicator(
+                                  strokeWidth: 2,
+                                  color: Colors.white70,
+                                ),
+                              )
+                              : Icon(Icons.add, size: 18),
+                      label:
+                          provider.isadding
+                              ? Text('Adding')
+                              : Text('Add to Cart'),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.orange,
                         foregroundColor: Colors.white,

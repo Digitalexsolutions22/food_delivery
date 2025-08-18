@@ -2,18 +2,21 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/apis.dart';
+import 'package:food_delivery/features/home/models/currentordersmodel.dart';
 import 'package:food_delivery/features/home/models/currentplanmodel.dart';
 import 'package:food_delivery/features/home/models/fooditemsmodel.dart';
 import 'package:food_delivery/features/home/models/location_model.dart';
 import 'package:food_delivery/features/home/models/categoriesmodel.dart';
 import 'package:food_delivery/features/home/models/mealplansmodel.dart';
 import 'package:food_delivery/features/home/models/seemealmodel.dart';
+import 'package:food_delivery/features/home/models/viewcartmodel.dart';
 import 'package:food_delivery/functions/networkhelper.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:geocoding/geocoding.dart';
 
 class Homeprovider extends ChangeNotifier {
   bool isloading = false;
+  bool isadding = false;
 
   List<FoodItem> _allItems = [];
   List<FoodItem> searchItemsList = [];
@@ -191,6 +194,136 @@ class Homeprovider extends ChangeNotifier {
       log(planWithItems!.items.length.toString()); // Example: 3 items
     } else {
       planWithItems = null;
+    }
+
+    isloading = false;
+    notifyListeners();
+  }
+
+  // get schedule
+  List<Schedule> scheduleList = [];
+
+  Future<void> getSchedule(String bookingId) async {
+    isloading = true;
+
+    final res = await GetApiHelper().getRequest(
+      "${Apis.getschedule}?booking_id=$bookingId",
+    );
+
+    if (res['status'] == 'success' && res['data'] is List) {
+      scheduleList =
+          (res['data'] as List).map((item) => Schedule.fromJson(item)).toList();
+      log(scheduleList.length.toString()); // Example: 6 items
+    } else {
+      scheduleList = [];
+    }
+
+    isloading = false;
+    notifyListeners();
+  }
+
+  // get cart
+  List<CartItem> cartList = [];
+
+  Future<void> getCart(String userId) async {
+    isloading = true;
+
+    final res = await GetApiHelper().getRequest(
+      "${Apis.viewCart}?user_id=$userId",
+    );
+
+    if (res['status'] == 'success' && res['cart'] is List) {
+      cartList =
+          (res['cart'] as List).map((item) => CartItem.fromJson(item)).toList();
+      log(cartList.length.toString()); // Example: 2 items
+    } else {
+      cartList = [];
+    }
+
+    isloading = false;
+    notifyListeners();
+  }
+
+  //remove cart
+  Future<void> removeFromCart(BuildContext context, String cartId) async {
+    isloading = true;
+
+    final res = await PostApiHelper().postRequest(Apis.removeCart, {
+      "cart_id": cartId,
+    });
+
+    if (res?['status'] == 'success') {
+      // Show success message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Item removed successfully")),
+      );
+
+      // Optionally refresh cart list
+      await getCart("1"); // pass userId here
+    } else {
+      // Show error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Failed to remove item")),
+      );
+    }
+
+    isloading = false;
+    notifyListeners();
+  }
+
+  //add to cart
+  Future<void> addToCart(
+    BuildContext context,
+    String foodId,
+    String quantity,
+  ) async {
+    isadding = true;
+    notifyListeners();
+
+    final res = await PostApiHelper().postRequest(Apis.addToCart, {
+      "user_id": "1",
+      "food_id": foodId,
+      "quantity": quantity,
+    });
+
+    if (res?['status'] == 'success') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Item added to cart")),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Failed to add item")),
+      );
+    }
+
+    isadding = false;
+    notifyListeners();
+  }
+
+  // update cart
+  Future<void> updateCart(
+    BuildContext context,
+    String cartId,
+    String quantity,
+  ) async {
+    isloading = true;
+
+    final res = await PostApiHelper().postRequest(Apis.updateCart, {
+      "cart_id": cartId,
+      "quantity": quantity,
+    });
+
+    if (res?['status'] == 'success') {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Cart updated successfully")),
+      );
+
+      // Refresh cart list
+      await getCart("1"); // replace "1" with userId
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(res?['message'] ?? "Failed to update cart")),
+      );
     }
 
     isloading = false;
