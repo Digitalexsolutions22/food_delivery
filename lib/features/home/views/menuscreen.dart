@@ -212,7 +212,7 @@ class MenuScreenState extends State<MenuScreen> {
     final provider = Provider.of<Homeprovider>(context, listen: false);
     return GestureDetector(
       onTap: () {
-        menuitem(context);
+        menuitem(context, foodid);
       },
       child: Container(
         margin: EdgeInsets.only(bottom: 16, top: 2, left: 2),
@@ -255,6 +255,7 @@ class MenuScreenState extends State<MenuScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
@@ -300,7 +301,7 @@ class MenuScreenState extends State<MenuScreen> {
                         provider.addToCart(context, foodid, "1");
                       },
                       icon:
-                          provider.isadding
+                          provider.isadding && provider.food_id == foodid
                               ? SizedBox(
                                 height: 16,
                                 width: 16,
@@ -311,7 +312,7 @@ class MenuScreenState extends State<MenuScreen> {
                               )
                               : Icon(Icons.add, size: 18),
                       label:
-                          provider.isadding
+                          provider.isadding && provider.food_id == foodid
                               ? Text('Adding')
                               : Text('Add to Cart'),
                       style: ElevatedButton.styleFrom(

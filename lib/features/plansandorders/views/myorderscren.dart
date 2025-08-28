@@ -250,7 +250,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                         ),
                                       ],
                                     ),
-                                    SizedBox(height: 12),
+                                    SizedBox(height: 4),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -263,7 +263,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                               MainBody(
                                                 title: data[index].mealTime,
                                                 fontSize: 15,
-                                                fontWeight: FontWeight.w500,
+                                                fontWeight: FontWeight.w400,
                                                 fontcolor: AppColors.black,
                                               ),
                                               // SizedBox(height: 4),
@@ -347,7 +347,7 @@ class _MyorderScreenState extends State<MyorderScreen> {
                                       },
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
-                                          vertical: 8,
+                                          vertical: 6,
                                         ),
                                         width: double.infinity,
                                         decoration: BoxDecoration(

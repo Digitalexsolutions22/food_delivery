@@ -35,12 +35,12 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     color: Colors.black87,
                   ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 4),
 
                 // Subtitle
                 Text(
                   'Enter your email account to reset password',
-                  style: TextStyle(fontSize: 16, color: Colors.grey.shade600),
+                  style: TextStyle(fontSize: 15, color: Colors.grey.shade600),
                 ),
                 SizedBox(height: 40),
                 Visibility(
@@ -78,7 +78,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20),
+                SizedBox(height: 30),
                 // Continue button
                 SizedBox(
                   width: double.infinity,
@@ -115,7 +115,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(width: 0.3),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(12),
                   ),
                   width: double.infinity,
                   height: 50,

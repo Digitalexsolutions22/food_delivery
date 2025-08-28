@@ -433,6 +433,7 @@ class _PlansScreenState extends State<PlansScreen>
                                                     onTap: () {
                                                       PlanDetailsBottomSheet.show(
                                                         context,
+
                                                         planDuration:
                                                             provider
                                                                 .planslist[index]

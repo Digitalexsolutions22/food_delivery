@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
+import 'package:food_delivery/features/authentication/views/forgotpassword.dart';
+import 'package:food_delivery/features/authentication/views/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -24,18 +26,19 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               // Status bar area
-              SizedBox(height: 30),
+              // SizedBox(height: 30),
               // Burger image
               Container(
-                height: 240,
+                height: 220,
+                // padding: EdgeInsets.all(30),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
+                  // borderRadius: BorderRadius.circular(16),
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
+                  // borderRadius: BorderRadius.circular(16),
                   child: Image.asset(
-                    AppImages.loginimage,
+                    AppImages.loginimage2,
                     fit: BoxFit.cover,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
@@ -75,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         'Login to continue',
                         style: TextStyle(
                           fontSize: 22,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.bold,
                           color: Colors.black,
                         ),
                       ),
@@ -116,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 18),
+                    SizedBox(height: 24),
 
                     // Password field
                     Text(
@@ -203,10 +206,15 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            // Handle forgot password
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ForgotPasswordScreen(),
+                              ),
+                            );
                           },
                           child: Text(
-                            'Forgot password',
+                            'Forgot password ?',
                             style: TextStyle(
                               fontSize: 12,
                               color: AppColors.orange,
@@ -253,18 +261,23 @@ class _LoginScreenState extends State<LoginScreen> {
                           Text(
                             "Don't have an account? ",
                             style: TextStyle(
-                              fontSize: 14,
+                              fontSize: 13,
                               color: Colors.black87,
                             ),
                           ),
                           GestureDetector(
                             onTap: () {
-                              // Handle sign up
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SignUpScreen(),
+                                ),
+                              );
                             },
                             child: Text(
                               'Sign up',
                               style: TextStyle(
-                                fontSize: 14,
+                                fontSize: 13,
                                 color: AppColors.orange,
                                 fontWeight: FontWeight.w600,
                               ),

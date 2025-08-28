@@ -33,14 +33,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 Text(
                   'Sign Up',
                   style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold,
                     color: Colors.black,
                   ),
                   textAlign: TextAlign.center,
                 ),
 
-                SizedBox(height: 30),
+                SizedBox(height: 40),
 
                 // Name Field
                 _buildLabel('Name'),
@@ -123,6 +123,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Checkbox(
                       value: _agreeToTerms,
+
                       onChanged: (value) {
                         setState(() {
                           _agreeToTerms = value ?? false;
@@ -133,7 +134,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       checkColor: Colors.white,
                     ),
                     Expanded(
-                      child: MainBody(title: "Agree to Terms & Condition"),
+                      child: MainBody(
+                        title: "Agree to Terms & Conditions",
+                        fontSize: 13,
+                      ),
                     ),
                   ],
                 ),
@@ -180,19 +184,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   children: [
                     Text(
                       'Already have an account? ',
-                      style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                      style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                     ),
                     GestureDetector(
-                      onTap: () {
-                        // Handle login navigation
-                        print('Login pressed');
-                      },
+                      onTap: () => print('Login pressed'),
                       child: Text(
-                        'Login in',
+                        'Log in',
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 15,
                           color: Colors.orange,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),
@@ -212,9 +213,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: 14,
         fontWeight: FontWeight.w500,
-        color: Colors.black87,
+        color: Colors.grey[700],
       ),
     );
   }
@@ -225,32 +226,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
     bool obscureText = false,
     Widget? suffixIcon,
   }) {
-    return SizedBox(
-      height: 50,
-      child: TextFormField(
-        keyboardType: keyboardType,
-        obscureText: obscureText,
-        style: TextStyle(fontSize: 16, color: Colors.black87),
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: TextStyle(fontSize: 16, color: Colors.grey[500]),
-          suffixIcon: suffixIcon,
-          contentPadding: EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10),
-            borderSide: BorderSide(color: Colors.orange, width: 2),
-          ),
-          filled: true,
-          fillColor: Colors.white,
+    return TextFormField(
+      keyboardType: keyboardType,
+      obscureText: obscureText,
+      style: TextStyle(fontSize: 16, color: Colors.black87),
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: TextStyle(fontSize: 15, color: Colors.grey[500]),
+        suffixIcon: suffixIcon,
+        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: Colors.orange, width: 2),
+        ),
+        filled: true,
+        fillColor: Colors.white,
       ),
     );
   }

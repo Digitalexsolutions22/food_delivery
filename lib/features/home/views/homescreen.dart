@@ -8,6 +8,7 @@ import 'package:food_delivery/customwidgets/loading_screens.dart/loading_screen.
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/hometitle.dart';
 import 'package:food_delivery/features/home/provider/homeprovider.dart';
+import 'package:food_delivery/features/plansandorders/views/cart.dart';
 import 'package:food_delivery/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -229,28 +230,35 @@ class _HomescreenState extends State<Homescreen> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text(
-                                                      provider
-                                                          .foodItemsList[index]
-                                                          .foodName,
-                                                      style: TextStyle(
-                                                        fontSize: 17,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        color: Colors.black87,
-                                                      ),
+                                                    MainBody(
+                                                      title:
+                                                          provider
+                                                              .foodItemsList[index]
+                                                              .foodName,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      maxlines: 1,
+                                                      applymaxlines: true,
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontcolor: Colors.black87,
                                                     ),
-                                                    Text(
-                                                      provider
-                                                          .foodItemsList[index]
-                                                          .foodDescription,
-                                                      style: TextStyle(
-                                                        fontSize: 13,
-                                                        color: Colors.grey[600],
-                                                        height: 1.4,
-                                                      ),
+                                                    SizedBox(height: 4),
+                                                    MainBody(
+                                                      title:
+                                                          provider
+                                                              .foodItemsList[index]
+                                                              .foodDescription,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      maxlines: 1,
+                                                      applymaxlines: true,
+                                                      fontSize: 13,
+                                                      fontcolor: Colors.grey,
                                                     ),
-                                                    SizedBox(height: 8),
+
+                                                    SizedBox(height: 14),
                                                     Row(
                                                       children: [
                                                         Container(
@@ -393,7 +401,26 @@ class _HomescreenState extends State<Homescreen> {
                                                         SizedBox(
                                                           height: 40,
                                                           child: ElevatedButton(
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              provider.addToCart(
+                                                                context,
+                                                                provider
+                                                                    .foodItemsList[index]
+                                                                    .foodId
+                                                                    .toString(),
+                                                                "1",
+                                                              );
+                                                              Navigator.push(
+                                                                context,
+                                                                MaterialPageRoute(
+                                                                  builder:
+                                                                      (
+                                                                        context,
+                                                                      ) =>
+                                                                          CartSceeen(),
+                                                                ),
+                                                              );
+                                                            },
                                                             style: ElevatedButton.styleFrom(
                                                               backgroundColor:
                                                                   AppColors
@@ -518,9 +545,13 @@ class _HomescreenState extends State<Homescreen> {
                                                 MainBody(
                                                   title:
                                                       Appstring.ruppee +
-                                                      data.offerPrice,
+                                                      data.offerPrice.substring(
+                                                        0,
+                                                        data.offerPrice.length -
+                                                            3,
+                                                      ),
                                                   fontSize: 16,
-                                                  fontWeight: FontWeight.w500,
+                                                  fontWeight: FontWeight.w400,
                                                 ),
 
                                                 SizedBox(height: 20),
@@ -768,7 +799,13 @@ class _HomescreenState extends State<Homescreen> {
                                                         height: 32,
                                                         width: 146,
                                                         child: ElevatedButton(
-                                                          onPressed: () {},
+                                                          onPressed: () {
+                                                            provider.addToCart(
+                                                              context,
+                                                              "1",
+                                                              "1",
+                                                            );
+                                                          },
                                                           style: ElevatedButton.styleFrom(
                                                             backgroundColor:
                                                                 AppColors

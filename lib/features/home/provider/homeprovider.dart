@@ -271,6 +271,7 @@ class Homeprovider extends ChangeNotifier {
     notifyListeners();
   }
 
+  String food_id = "";
   //add to cart
   Future<void> addToCart(
     BuildContext context,
@@ -279,7 +280,7 @@ class Homeprovider extends ChangeNotifier {
   ) async {
     isadding = true;
     notifyListeners();
-
+    food_id = foodId;
     final res = await PostApiHelper().postRequest(Apis.addToCart, {
       "user_id": "1",
       "food_id": foodId,

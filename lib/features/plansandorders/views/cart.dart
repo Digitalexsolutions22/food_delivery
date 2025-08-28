@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
+import 'package:food_delivery/customwidgets/loading_screens.dart/empty_cart.dart';
 import 'package:food_delivery/customwidgets/loading_screens.dart/loading_cart.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/continerdecoration.dart';
@@ -39,6 +40,8 @@ class _CartSceeenState extends State<CartSceeen> {
           body:
               provider.isloading
                   ? LoadingCart()
+                  : provider.cartList.isEmpty
+                  ? EmptyCart()
                   : Stack(
                     children: [
                       CustomScrollView(
@@ -195,6 +198,9 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                   data[index]
                                                                       .foodName,
                                                               maxlines: 2,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .left,
                                                               applymaxlines:
                                                                   true,
                                                               fontSize: 16,
@@ -384,7 +390,8 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                   onTap: () {
                                                                     provider.removeFromCart(
                                                                       context,
-                                                                      "${data[index].cartId}",
+                                                                      data[index]
+                                                                          .cartId,
                                                                     );
                                                                   },
                                                                   child: Container(

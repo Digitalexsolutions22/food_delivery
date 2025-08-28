@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
+import 'package:food_delivery/features/home/provider/homeprovider.dart';
+import 'package:provider/provider.dart';
 
-Future<void> menuitem(BuildContext context) {
+Future<void> menuitem(BuildContext context, String Foodid) {
   return showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -42,43 +44,6 @@ Future<void> menuitem(BuildContext context) {
                             ),
                           ),
                         ),
-
-                        // High Protein Badge
-                        // Positioned(
-                        //   left: 16,
-                        //   bottom: 16,
-                        //   child: Container(
-                        //     padding: EdgeInsets.symmetric(
-                        //       horizontal: 8,
-                        //       vertical: 4,
-                        //     ),
-                        //     decoration: BoxDecoration(
-                        //       color: Colors.pink[100],
-                        //       borderRadius: BorderRadius.circular(12),
-                        //       border: Border.all(color: Colors.pink[300]!),
-                        //     ),
-                        //     child: Row(
-                        //       mainAxisSize: MainAxisSize.min,
-                        //       children: [
-                        //         Icon(
-                        //           Icons.fitness_center,
-                        //           size: 16,
-                        //           color: Colors.black,
-                        //         ),
-                        //         SizedBox(width: 4),
-                        //         Text(
-                        //           "HIGH\nPROTEIN",
-                        //           style: TextStyle(
-                        //             fontSize: 10,
-                        //             fontWeight: FontWeight.bold,
-                        //             color: Colors.black,
-                        //           ),
-                        //           textAlign: TextAlign.center,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // ),
 
                         // Close button
                         Positioned(
@@ -219,36 +184,84 @@ Future<void> menuitem(BuildContext context) {
                                 ),
                               ),
                               SizedBox(width: 20),
-                              Container(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: 34,
-                                  vertical: 8,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                    color: Colors.grey,
-                                    width: 0.6,
-                                  ), // Gray border
-                                  borderRadius: BorderRadius.circular(8),
-                                  boxShadow: [
-                                    // Shadow
-                                    BoxShadow(
-                                      color: Colors.grey.withAlpha(200),
-                                      spreadRadius: 2,
-                                      blurRadius: 4,
-                                      offset: Offset(1, 6), // vertical shadow
+                              Consumer<Homeprovider>(
+                                builder: (context, provider, _) {
+                                  return GestureDetector(
+                                    onTap: () {
+                                      provider.addToCart(context, Foodid, "1");
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 34,
+                                        vertical: 8,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border.all(
+                                          color: Colors.grey,
+                                          width: 0.6,
+                                        ), // Gray border
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          // Shadow
+                                          BoxShadow(
+                                            color: Colors.grey.withAlpha(200),
+                                            spreadRadius: 2,
+                                            blurRadius: 4,
+                                            offset: Offset(
+                                              1,
+                                              6,
+                                            ), // vertical shadow
+                                          ),
+                                        ],
+                                      ),
+                                      child:
+                                          provider.isadding &&
+                                                  provider.food_id == Foodid
+                                              ? TweenAnimationBuilder(
+                                                duration: Duration(
+                                                  milliseconds: 800,
+                                                ),
+                                                tween: Tween<double>(
+                                                  begin: 0,
+                                                  end: 1,
+                                                ),
+                                                builder: (
+                                                  context,
+                                                  progress,
+                                                  child,
+                                                ) {
+                                                  return Transform.translate(
+                                                    offset: Offset(
+                                                      0,
+                                                      -10 *
+                                                          (1 - progress) *
+                                                          progress *
+                                                          4,
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.add_shopping_cart,
+                                                      color: Color.lerp(
+                                                        Colors.grey,
+                                                        Colors.green,
+                                                        progress,
+                                                      ),
+                                                      size: 28,
+                                                    ),
+                                                  );
+                                                },
+                                              )
+                                              : Text(
+                                                "ADD",
+                                                style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.grey,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                     ),
-                                  ],
-                                ),
-                                child: Text(
-                                  "ADD",
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                  );
+                                },
                               ),
                             ],
                           ),

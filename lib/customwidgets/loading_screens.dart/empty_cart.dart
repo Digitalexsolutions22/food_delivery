@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
 import 'package:food_delivery/customwidgets/text/body.dart';
+import 'package:food_delivery/main.dart';
+import 'package:go_router/go_router.dart';
 
 class EmptyCart extends StatelessWidget {
   const EmptyCart({super.key});
@@ -13,7 +15,7 @@ class EmptyCart extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 100),
+            SizedBox(height: 60),
             Image.asset(
               AppImages.emptycart,
               height: 160,
@@ -28,19 +30,25 @@ class EmptyCart extends StatelessWidget {
             SizedBox(height: 4),
             MainBody(title: "Add something tasty"),
             SizedBox(height: 40),
-            Container(
-              height: 50,
-              width: 200,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: AppColors.yellowTransparent,
-              ),
-              child: Center(
-                child: MainBody(
-                  title: "Browse Menu",
-                  fontSize: 19,
-                  fontWeight: FontWeight.bold,
-                  fontcolor: AppColors.orange,
+            GestureDetector(
+              onTap: () {
+                Navigator.pop(context);
+                navigatorKey.currentContext?.go('/menu');
+              },
+              child: Container(
+                height: 50,
+                width: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: AppColors.yellowTransparent,
+                ),
+                child: Center(
+                  child: MainBody(
+                    title: "Browse Menu",
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    fontcolor: AppColors.orange,
+                  ),
                 ),
               ),
             ),

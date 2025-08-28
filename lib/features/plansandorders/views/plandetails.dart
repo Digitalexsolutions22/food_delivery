@@ -393,7 +393,7 @@ class _PlanDetailsBottomSheetState extends State<PlanDetailsBottomSheet> {
                             ),
                           ),
                           child: Text(
-                            'Select Meals',
+                            'See Meals',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,

@@ -1,12 +1,14 @@
 class AppImages {
   static const String homeimage = "assets/images/homebanner.png";
+  static const String loginimage2 = "assets/images/indian_Foods.webp";
+
   static const String searchiconthin = "assets/images/searchthinicon.png";
   static const String vegicon = "assets/images/bx_leaf.png";
   static const String nonvegicon = "assets/images/nonveg.png";
   static const String menuimage = "assets/images/Rectangle 37.png";
   static const String cardicon = "assets/images/Group.png";
   static const String codicon = "assets/images/man.png";
-  static const String loginimage =
+  static const String loginimage1 =
       "assets/images/ezgif.com-webp-to-jpg-converter.jpg";
   static const String forgotpassword = "assets/images/forgot-password.png";
   // Animations
