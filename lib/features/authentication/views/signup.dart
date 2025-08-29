@@ -187,7 +187,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       style: TextStyle(fontSize: 15, color: Colors.grey[600]),
                     ),
                     GestureDetector(
-                      onTap: () => print('Login pressed'),
+                      onTap: () => Navigator.pop(context),
                       child: Text(
                         'Log in',
                         style: TextStyle(

@@ -9,6 +9,7 @@ import 'package:food_delivery/customwidgets/text/body.dart';
 import 'package:food_delivery/customwidgets/text/hometitle.dart';
 import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:food_delivery/features/plansandorders/views/cart.dart';
+import 'package:food_delivery/features/plansandorders/views/plandetails.dart';
 import 'package:food_delivery/main.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -401,8 +402,8 @@ class _HomescreenState extends State<Homescreen> {
                                                         SizedBox(
                                                           height: 40,
                                                           child: ElevatedButton(
-                                                            onPressed: () {
-                                                              provider.addToCart(
+                                                            onPressed: () async {
+                                                              await provider.addToCart(
                                                                 context,
                                                                 provider
                                                                     .foodItemsList[index]
@@ -410,7 +411,7 @@ class _HomescreenState extends State<Homescreen> {
                                                                     .toString(),
                                                                 "1",
                                                               );
-                                                              Navigator.push(
+                                                              await Navigator.push(
                                                                 context,
                                                                 MaterialPageRoute(
                                                                   builder:
@@ -514,70 +515,124 @@ class _HomescreenState extends State<Homescreen> {
                                         var data = provider.planslist[index];
                                         return Padding(
                                           padding: EdgeInsets.only(right: 12),
-                                          child: Container(
-                                            width: 140,
-                                            decoration: BoxDecoration(
-                                              color:
-                                                  index % 2 == 0
-                                                      ? AppColors
-                                                          .blueTransparent
-                                                      : AppColors
-                                                          .yellowTransparent,
-                                              borderRadius:
-                                                  BorderRadius.circular(25),
-                                            ),
-                                            child: Column(
-                                              children: [
-                                                SizedBox(height: 22),
-                                                SizedBox(
-                                                  width: 100,
-                                                  height: 40,
-                                                  child: MainBody(
-                                                    applymaxlines: true,
-                                                    maxlines: 1,
-                                                    title: data.planName,
-                                                    fontSize: 15,
-                                                    textAlign: TextAlign.center,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                ),
-                                                SizedBox(height: 2),
-                                                MainBody(
-                                                  title:
-                                                      Appstring.ruppee +
-                                                      data.offerPrice.substring(
-                                                        0,
-                                                        data.offerPrice.length -
-                                                            3,
-                                                      ),
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w400,
-                                                ),
+                                          child: GestureDetector(
+                                            onTap: () async {
+                                              // navigatorKey.currentContext?.go(
+                                              //   "/plans",
+                                              // );
+                                              PlanDetailsBottomSheet.show(
+                                                context,
 
-                                                SizedBox(height: 20),
-                                                Container(
-                                                  width: 103,
-                                                  height: 26,
-                                                  decoration: BoxDecoration(
-                                                    color: AppColors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                          25,
-                                                        ),
-                                                  ),
-                                                  child: Center(
+                                                planDuration:
+                                                    provider
+                                                        .planslist[index]
+                                                        .durationType,
+                                                planType:
+                                                    provider
+                                                        .planslist[index]
+                                                        .planName,
+                                                mealTypes:
+                                                    provider
+                                                        .planslist[index]
+                                                        .description,
+                                                currentPrice:
+                                                    provider
+                                                        .planslist[index]
+                                                        .offerPrice,
+                                                originalPrice:
+                                                    provider
+                                                        .planslist[index]
+                                                        .price,
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 140,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    index % 2 == 0
+                                                        ? AppColors
+                                                            .blueTransparent
+                                                        : AppColors
+                                                            .yellowTransparent,
+                                                borderRadius:
+                                                    BorderRadius.circular(25),
+                                              ),
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(height: 22),
+                                                  SizedBox(
+                                                    width: 100,
                                                     child: MainBody(
-                                                      title: "Flexible",
-                                                      fontcolor:
-                                                          index % 2 == 0
-                                                              ? AppColors
-                                                                  .blueLight
-                                                              : AppColors
-                                                                  .yellow,
+                                                      applymaxlines: true,
+                                                      maxlines: 1,
+                                                      title: data.planName,
+                                                      fontSize: 15,
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                      fontWeight:
+                                                          FontWeight.bold,
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  SizedBox(height: 12),
+                                                  MainBody(
+                                                    title:
+                                                        Appstring.ruppee +
+                                                        data.offerPrice
+                                                            .substring(
+                                                              0,
+                                                              data
+                                                                      .offerPrice
+                                                                      .length -
+                                                                  3,
+                                                            ),
+                                                    fontSize: 16,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                  Text(
+                                                    Appstring.ruppee +
+                                                        data.price.substring(
+                                                          0,
+                                                          data
+                                                                  .offerPrice
+                                                                  .length -
+                                                              3,
+                                                        ),
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: AppColors.orange,
+                                                      decoration:
+                                                          TextDecoration
+                                                              .lineThrough,
+                                                    ),
+                                                  ),
+
+                                                  SizedBox(height: 12),
+                                                  Container(
+                                                    width: 103,
+                                                    height: 26,
+                                                    decoration: BoxDecoration(
+                                                      color: AppColors.white,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                            25,
+                                                          ),
+                                                    ),
+                                                    child: Center(
+                                                      child: MainBody(
+                                                        title: "Flexible",
+                                                        fontcolor:
+                                                            index % 2 == 0
+                                                                ? AppColors
+                                                                    .blueLight
+                                                                : AppColors
+                                                                    .yellow,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         );

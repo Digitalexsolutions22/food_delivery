@@ -83,13 +83,14 @@ If you have any questions or concerns, reach out to us at:<br>
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              color: AppColors.orange,
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
-              width: double.infinity,
+      body: Column(
+        children: [
+          Container(
+            color: AppColors.orange,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 12),
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 40.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -114,33 +115,33 @@ If you have any questions or concerns, reach out to us at:<br>
                 ],
               ),
             ),
+          ),
 
-            const SizedBox(height: 10),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[50],
-                    border: Border.all(color: AppColors.black.withAlpha(50)),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: SingleChildScrollView(
-                    child: HtmlWidget(
-                      privacyPolicyHtml,
-                      textStyle: const TextStyle(
-                        fontSize: 13,
-                        color: Colors.black87,
-                        height: 1.5,
-                      ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.grey[50],
+                  border: Border.all(color: AppColors.black.withAlpha(50)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: SingleChildScrollView(
+                  child: HtmlWidget(
+                    privacyPolicyHtml,
+                    textStyle: const TextStyle(
+                      fontSize: 13,
+                      color: Colors.black87,
+                      height: 1.5,
                     ),
                   ),
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

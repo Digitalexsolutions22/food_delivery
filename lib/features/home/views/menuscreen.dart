@@ -38,7 +38,11 @@ class MenuScreenState extends State<MenuScreen> {
                   ? LoadingMenu()
                   : SafeArea(
                     child: Padding(
-                      padding: const EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.only(
+                        top: 18.0,
+                        right: 18,
+                        left: 18,
+                      ),
                       child: CustomScrollView(
                         slivers: [
                           // Title

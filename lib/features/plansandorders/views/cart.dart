@@ -254,7 +254,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                             Row(
                                                               children: [
                                                                 SizedBox(
-                                                                  width: 8,
+                                                                  width: 6,
                                                                 ),
                                                                 GestureDetector(
                                                                   onTap: () {
@@ -277,8 +277,8 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                   },
                                                                   child: Container(
                                                                     width:
-                                                                        28, // Larger touch target
-                                                                    height: 28,
+                                                                        26, // Larger touch target
+                                                                    height: 26,
                                                                     decoration: BoxDecoration(
                                                                       color:
                                                                           Colors
@@ -297,7 +297,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                       Icons
                                                                           .remove,
                                                                       size:
-                                                                          20, // Slightly larger icon
+                                                                          18, // Slightly larger icon
                                                                       color:
                                                                           Colors
                                                                               .grey[700],
@@ -307,10 +307,11 @@ class _CartSceeenState extends State<CartSceeen> {
 
                                                                 // Quantity display with better spacing
                                                                 Padding(
-                                                                  padding: EdgeInsets.symmetric(
-                                                                    horizontal:
-                                                                        20,
-                                                                  ), // More horizontal space
+                                                                  padding:
+                                                                      EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            12,
+                                                                      ),
                                                                   child: Container(
                                                                     constraints:
                                                                         BoxConstraints(
@@ -325,7 +326,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                               .center,
                                                                       style: TextStyle(
                                                                         fontSize:
-                                                                            18,
+                                                                            17,
                                                                         fontWeight:
                                                                             FontWeight.w700, // Bolder
                                                                         color:
@@ -350,8 +351,8 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                     );
                                                                   },
                                                                   child: Container(
-                                                                    width: 28,
-                                                                    height: 28,
+                                                                    width: 26,
+                                                                    height: 26,
                                                                     decoration: BoxDecoration(
                                                                       color:
                                                                           AppColors
@@ -379,7 +380,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                           Colors
                                                                               .white,
                                                                       size:
-                                                                          20, // Consistent icon size
+                                                                          18, // Consistent icon size
                                                                     ),
                                                                   ),
                                                                 ),
@@ -397,7 +398,7 @@ class _CartSceeenState extends State<CartSceeen> {
                                                                   child: Container(
                                                                     padding:
                                                                         EdgeInsets.all(
-                                                                          8,
+                                                                          6,
                                                                         ), // Better touch target
                                                                     child: Image.asset(
                                                                       AppImages
@@ -826,13 +827,11 @@ class _CartSceeenState extends State<CartSceeen> {
                                       SizedBox(
                                         width: double.infinity,
                                         child: ElevatedButton(
-                                          onPressed: () {
-                                            // Handle place order
-                                          },
+                                          onPressed: () {},
                                           style: ElevatedButton.styleFrom(
                                             backgroundColor: AppColors.orange,
                                             padding: EdgeInsets.symmetric(
-                                              vertical: 16,
+                                              vertical: 12,
                                             ),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:

@@ -1,10 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/fonts.dart';
 import 'package:food_delivery/constants/routs.dart';
+import 'package:food_delivery/features/authentication/provider/authprovider.dart';
 import 'package:food_delivery/features/home/provider/homeprovider.dart';
 import 'package:food_delivery/firebase_options.dart';
 import 'package:food_delivery/notification/notification_service.dart';
@@ -35,7 +38,12 @@ Future<void> main() async {
   );
 
   runApp(const MyApp());
-  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  // If you want to use DevicePreview with ShowCaseWidget:
+  // runApp(
+  //   DevicePreview(enabled: !kReleaseMode, builder: (context) => const MyApp()),
+  // );
+  // await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 }
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -52,7 +60,10 @@ class MyApp extends StatelessWidget {
     return isTablet
         ? SizedBox()
         : MultiProvider(
-          providers: [ChangeNotifierProvider(create: (_) => Homeprovider())],
+          providers: [
+            ChangeNotifierProvider(create: (_) => Homeprovider()),
+            ChangeNotifierProvider(create: (context) => Authprovider()),
+          ],
           child: Builder(
             builder:
                 (context) => MediaQuery(

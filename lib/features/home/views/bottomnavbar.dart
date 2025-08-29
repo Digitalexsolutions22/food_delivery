@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:food_delivery/constants/colors.dart';
-import 'package:food_delivery/features/plansandorders/views/cart.dart';
 import 'package:go_router/go_router.dart';
 
 class BottomNavShell extends StatefulWidget {
@@ -122,14 +121,14 @@ class _BottomNavShellState extends State<BottomNavShell> {
             ],
           ),
         ),
-        floatingActionButton: FloatingCartButton(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => CartSceeen()),
-            );
-          },
-        ),
+        floatingActionButton:
+            MediaQuery.of(context).viewInsets.bottom == 0
+                ? FloatingCartButton(
+                  onTap: () {
+                    context.go('/cart');
+                  },
+                )
+                : null,
       ),
     );
   }
@@ -184,7 +183,7 @@ class FloatingCartButton extends StatelessWidget {
       shape: const CircleBorder(),
       onPressed: onTap,
       backgroundColor: AppColors.orange,
-      child: const Icon(Icons.shopping_cart, color: AppColors.white, size: 28),
+      child: const Icon(Icons.shopping_cart, color: AppColors.white, size: 26),
     );
   }
 }

@@ -19,6 +19,11 @@ class AppImages {
       "assets/images/animations/Confetti Rain v2.json";
   static const String foodpreparedanimation =
       "assets/images/animations/Food Prepared.json";
+  static const String deliverytruckanimation =
+      "assets/images/animations/Delivery Truck_lottie.json";
+  static const String rocketanimation =
+      "assets/images/animations/rocket_Splash.json";
+  static const String edituser = "assets/images/user-avatar.png";
   static const List<String> actions = [
     "assets/images/boxVector.png",
     "assets/images/calenderVector.png",

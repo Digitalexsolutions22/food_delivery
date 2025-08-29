@@ -251,25 +251,39 @@ class Homeprovider extends ChangeNotifier {
     final res = await PostApiHelper().postRequest(Apis.removeCart, {
       "cart_id": cartId,
     });
+    if (!_isSnackBarVisible) {
+      _isSnackBarVisible = true;
 
-    if (res?['status'] == 'success') {
-      // Show success message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Item removed successfully")),
-      );
-
-      // Optionally refresh cart list
-      await getCart("1"); // pass userId here
-    } else {
-      // Show error message
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Failed to remove item")),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              content: Text(
+                res?['message'] ??
+                    (res?['status'] == 'success'
+                        ? "Item removed successfully"
+                        : "Failed to remove item"),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Colors.orange.withAlpha(200),
+              duration: const Duration(seconds: 2),
+            ),
+          )
+          .closed
+          .then((_) {
+            _isSnackBarVisible = false; // reset when closed
+            // Refresh cart list
+            getCart("1");
+          });
     }
 
     isloading = false;
     notifyListeners();
   }
+
+  bool _isSnackBarVisible = false; // declare at class level
 
   String food_id = "";
   //add to cart
@@ -287,14 +301,30 @@ class Homeprovider extends ChangeNotifier {
       "quantity": quantity,
     });
 
-    if (res?['status'] == 'success') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Item added to cart")),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Failed to add item")),
-      );
+    if (!_isSnackBarVisible) {
+      _isSnackBarVisible = true;
+
+      ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              content: Text(
+                res?['message'] ??
+                    (res?['status'] == 'success'
+                        ? "Item added to cart"
+                        : "Failed to add item"),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Colors.orange.withAlpha(200),
+              duration: const Duration(seconds: 2),
+            ),
+          )
+          .closed
+          .then((_) {
+            _isSnackBarVisible = false; // reset when closed
+          });
     }
 
     isadding = false;
@@ -313,18 +343,32 @@ class Homeprovider extends ChangeNotifier {
       "cart_id": cartId,
       "quantity": quantity,
     });
+    if (!_isSnackBarVisible) {
+      _isSnackBarVisible = true;
 
-    if (res?['status'] == 'success') {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Cart updated successfully")),
-      );
-
-      // Refresh cart list
-      await getCart("1"); // replace "1" with userId
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(res?['message'] ?? "Failed to update cart")),
-      );
+      ScaffoldMessenger.of(context)
+          .showSnackBar(
+            SnackBar(
+              content: Text(
+                res?['message'] ??
+                    (res?['status'] == 'success'
+                        ? "Cart updated successfully"
+                        : "Failed to update cart"),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Colors.orange.withAlpha(200),
+              duration: const Duration(seconds: 2),
+            ),
+          )
+          .closed
+          .then((_) {
+            _isSnackBarVisible = false; // reset when closed
+            // Refresh cart list
+            getCart("1");
+          });
     }
 
     isloading = false;

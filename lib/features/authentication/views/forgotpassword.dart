@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
-import 'package:food_delivery/features/authentication/verificationcode.dart';
+import 'package:food_delivery/features/authentication/views/verificationcode.dart';
 
 // Screen 1: Forgot Password
 class ForgotPasswordScreen extends StatefulWidget {

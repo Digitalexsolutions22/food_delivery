@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/constants/colors.dart';
 import 'package:food_delivery/constants/images.dart';
-import 'package:food_delivery/features/authentication/views/forgotpassword.dart';
-import 'package:food_delivery/features/authentication/views/signup.dart';
+import 'package:food_delivery/main.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -77,13 +77,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         'Login to continue',
                         style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          color: Colors.black87,
                         ),
                       ),
                     ),
-                    SizedBox(height: 28),
+                    SizedBox(height: 38),
 
                     // Email field
                     Text(
@@ -169,7 +169,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    SizedBox(height: 2),
 
                     // Remember me and Forgot password row
                     Row(
@@ -206,12 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         TextButton(
                           onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => ForgotPasswordScreen(),
-                              ),
-                            );
+                            context.go('/login/forgotpass');
                           },
                           child: Text(
                             'Forgot password ?',
@@ -224,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 60),
 
                     // Login button
                     SizedBox(
@@ -232,7 +227,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 48,
                       child: ElevatedButton(
                         onPressed: () {
-                          // Handle login
+                          navigatorKey.currentContext?.go("/home");
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.orange,
@@ -251,7 +246,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20),
+                    SizedBox(height: 10),
 
                     // Sign up text
                     Center(
@@ -267,12 +262,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => SignUpScreen(),
-                                ),
-                              );
+                              context.go('/login/signup');
                             },
                             child: Text(
                               'Sign up',
